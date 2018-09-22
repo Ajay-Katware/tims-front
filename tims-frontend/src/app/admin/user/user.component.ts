@@ -11,7 +11,7 @@ import { AdduserDialogComponent } from './adduser-dialog/adduser-dialog.componen
 import { Role } from '../../shared/models/role';
 import { ToasterService } from '../../shared/services/toaster.service';
 import { Router } from '@angular/router';
-import { GenericTerm } from '../generic-term';
+import { GenericTerm } from '../Generic/generic-term';
 
 @Component({
   selector: 'app-user',

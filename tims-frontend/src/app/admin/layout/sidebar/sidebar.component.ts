@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from '../../../shared/models/user';
 import { GeneratedFile } from '@angular/compiler';
-import { GenericTerm } from '../../generic-term';
+import { GenericTerm } from '../../Generic/generic-term';
 
 @Component({
   selector: 'app-sidebar',

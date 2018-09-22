@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material';
 import { UpdatePasswordDailogComponent } from '../../dialog/update-password-dailog/update-password-dailog.component';
 import { LoginService } from '../../../shared/services/login.service';
 import { GeneratedFile } from '@angular/compiler';
-import { GenericTerm } from '../../generic-term';
+import { GenericTerm } from '../../Generic/generic-term';
 
 @Component({
   selector: 'app-header',
