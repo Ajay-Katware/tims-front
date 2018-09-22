@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th style="width:5%">#</th>
+      <th style="width:50%">ITEM DETAILS</th>
+      <th style="width:15%">QUANTITY ORDERED</th>
+      <th style="width:15%">QUANTITY PAKCED</th>
+      <th style="width:15%">QUANTITY TO PACK</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of salesItems ; let i = index;">
+      <td>{{i+1}}</td>
+      <td>{{item.itemid.itemCode}} {{item.itemid.productid.productName}}</td>
+      <td>{{item.quantity}}</td>
+      <td>0</td>
+      <td>{{item.quantity}}</td>
+    </tr>
+  </tbody>
+</table>

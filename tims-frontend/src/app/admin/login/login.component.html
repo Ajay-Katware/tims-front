@@ -1,0 +1,37 @@
+<div class="mat-bg--primary--400" [style.min-height]="'100vh'" fxFlex="100" fxLayoutAlign="center center">
+  <div fxFlex="100" [style.max-width]="'400px'">
+    <mat-card>
+      <div class="py-1" ngClass.gt-xs="p-1">
+        <div class="logo1 text-center">
+          <img src="assets/images/logo.png">
+          <div class="mat-h2 mt-5">Login to your account</div>
+        </div>
+        <div class="mt-1">
+          <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+            <mat-error *ngIf="errorMessage!=null">{{errorMessage}}</mat-error>
+            <div>
+              <mat-form-field fxFlex="100">
+                <input matInput type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field fxFlex="100">
+                <input matInput type="password" placeholder="Password" name="userpwd" [(ngModel)]="user.userpwd" required>
+              </mat-form-field>
+            </div>
+           
+            <div fxLayoutAlign="space-between center" fxLayout="row" class="mb-1" fxLayoutGap=".2rem">
+              <!-- <mat-checkbox>Remember Me</mat-checkbox> -->
+              <span fxFlex></span>
+              <a routerLink="/admin/forgot-password" class="mat-body-1 text-center link">Forgot Password?</a>
+            </div>
+            <!-- <button type="submit" mat-raised-button color="accent" [disabled]="!userForm.form.valid"  [style.width]="'220px'">Login</button>  -->
+            <div fxLayout="column" fxLayoutAlign="center center" class="my-1" fxLayoutGap="1rem">
+              <button type="submit" id="submitButton" mat-raised-button color="accent" [disabled]="!userForm.form.valid" [style.width]="'220px'">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

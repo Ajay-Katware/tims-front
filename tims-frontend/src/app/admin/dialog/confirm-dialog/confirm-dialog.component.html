@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Do you want to delete this row?</h1>
+<div mat-dialog-content>
+  <!-- <p>Id: {{data.id}}</p> -->
+<!-- <p>Title: {{data.title}}</p> -->
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="confirmDelete()">OK</button>
+  <!-- <span fxFlex></span> -->
+  <button mat-raised-button color="accent" (click)="onNoClick()"  tabindex="" x="-1">Cancel</button>
+</div>
+

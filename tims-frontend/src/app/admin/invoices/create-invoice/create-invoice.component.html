@@ -1,0 +1,168 @@
+<div>
+  <div fxLayout="column">
+    <mat-card class="default">
+      <mat-card-header>
+        <mat-card-title>New Invoice</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mb-0 px-1">
+        <form ngClass.gt-xs="px-1" [formGroup]="salesOrderForm">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                  <mat-select placeholder="Select Customer" (selectionChange)="choosedCustomer($event.value)" formControlName="customerid"
+                    required readonly>
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let obj of customers" [value]="obj.id">
+                      {{ obj.salutation }} {{ obj.firstname }} {{ obj.lastname }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50" *ngIf="customeremail!=null">
+                  <input matInput placeholder="Customer Email" type="text" [value]="customeremail">
+                </mat-form-field>
+              </div>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50" *ngIf="billingAddress!=null">
+                  <textarea matInput placeholder="Billing Address" type="text" matAutosize>{{billingAddress}}</textarea>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50" *ngIf="shippingAddress!=null">
+                  <textarea matInput placeholder="Shipping Address" type="text" matAutosize>{{shippingAddress}}</textarea>
+                </mat-form-field>
+              </div>
+              <br>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+                  <input matInput placeholder="Invoice No#" type="text" formControlName="invoiceno">
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+                  <input matInput placeholder="Sales Order#" type="text" formControlName="salesorderno" readonly required>
+                </mat-form-field>
+                <mat-form-field fxFlex.gt-xs="23" fxFlex="100">
+                  <input matInput [matDatepicker]="picker1" placeholder="Order Date" [min]="minDate" formControlName="orderdate" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field fxFlex.gt-xs="23" fxFlex="100">
+                  <input matInput [matDatepicker]="picker2" placeholder="Due Date" [min]="minDate" formControlName="expecteddate" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+                  <input matInput placeholder="Sales Person" formControlName="salesperson" type="text" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+                  <input matInput placeholder="Terms" formControlName="shipvia" type="text" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+                  <input matInput placeholder="Notes" formControlName="notes" type="text">
+                </mat-form-field>
+              </div>
+              <mat-tab-group>
+                <mat-tab label="Tab 1">
+                  <ng-template mat-tab-label>Item Details</ng-template>
+                  <br>
+                  <button mat-button color="primary" type="button" (click)="addLair()">Add Row + </button>
+                  <div class="p-1">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th style="width:5%">&nbsp;#</th>
+                          <th style="width:15%">ITEM ID</th>
+                          <th style="width:30%">ITEM TYPE</th>
+                          <th style="width:6%">QUANTITY</th>
+                          <th style="width:8%">UNIT</th>
+                          <th style="width:10%">RATE</th>
+                          <th style="width:8%">DISCOUNT</th>
+                          <th style="width:15%">AMOUNT</th>
+                          <th style="width:3%;" *ngIf="salesOrderForm.controls['orderedItems'].controls.length > 1"></th>
+                        </tr>
+                      </thead>
+                      <tbody formArrayName="orderedItems">
+                        <tr *ngFor="let address of orderedItems.controls; let i=index" [formGroupName]="i">
+                          <td>
+                            <input matInput placeholder="Sr No" type="text" [value]="i+1" readonly>
+                          </td>
+                          <td>
+                            <mat-form-field>
+                              <input matInput placeholder="Barcode" type="text" formControlName="barcode" (keyup.enter)="scanBarcode(i)" (blur)="scanBarcode(i)"
+                                required>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <input matInput placeholder="Product" type="text" formControlName="productname" readonly>
+                          </td>
+                          <td>
+                            <input matInput placeholder="Quantity" type="text" formControlName="quantity" required readonly>
+                          </td>
+                          <td>
+                            <input matInput placeholder="Unit" type="text" formControlName="unit" readonly>
+                          </td>
+                          <td>
+                            <input matInput placeholder="Rate" type="text" formControlName="rate" required readonly>
+                          </td>
+                          <td>
+                            <mat-form-field style="width:80px;">
+                              <input matInput placeholder="Discount" type="text" formControlName="discount" (keyup.enter)="applyDiscount(i)" (blur)="applyDiscount(i)">
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <input matInput placeholder="Amount" type="text" formControlName="amount" required readonly>
+                          </td>
+                          <td style="width:3%;" *ngIf="orderedItems.controls.length > 1">
+                            <button type="button" mat-button color="accent" (click)="removeAddress(i)" mat-mini-fab>
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="5"></td>
+                          <td colspan="2">Subtotal</td>
+                          <td>
+                            <input matInput placeholder="Subtotal" type="text" formControlName="subtotal" required>
+                          </td>
+                          <td *ngIf="orderedItems.controls.length > 1"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="5"></td>
+                          <td>Tax</td>
+                          <td>
+                            <mat-form-field style="width:100px;">
+                              <input matInput placeholder="Tax %" formControlName="taxpercent" type="text" (keyup.enter)="applyTax()" (blur)="applyTax()">
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <input matInput placeholder="tax value" type="text" formControlName="tax" required>
+                          </td>
+                          <td *ngIf="orderedItems.controls.length > 1"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="5"></td>
+                          <td colspan="2">Total</td>
+                          <td>
+                            <input matInput placeholder="total" type="text" formControlName="total" required>
+                          </td>
+                          <td *ngIf="orderedItems.controls.length > 1"></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <br>
+                </mat-tab>
+              </mat-tab-group>
+              <div class="ptb-5 mb-1">
+                <button mat-raised-button color="primary" type="submit" class="mr-1" (click)="confirmAdd()" [disabled]="!salesOrderForm.valid">Save</button>
+                <button mat-raised-button color="accent" (click)="goBack()" type="button">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<!-- <pre>Form value: {{ salesOrderForm.value | json }}</pre> -->

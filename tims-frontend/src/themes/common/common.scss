@@ -1,0 +1,132 @@
+/*---- Breakpoints Mixin -----*/
+
+$breakpoints: (
+  'x-small': (max-width: 599px),
+  'small': (max-width: 959px),
+  'medium': (max-width: 1279px),
+  'large': (max-width: 1919px)
+);
+
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == 'string',
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+
+    @media #{$query} {
+      @content;
+    }
+  }
+  @else {
+    @error 'No value found for `#{$breakpoint}`.'  
+    + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+/*---- equal width and height -----*/
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+ 
+/*---- font size and line height -----*/
+@mixin fontandline($font-size, $line-height: $font-size) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+/*---- Theme  -----*/
+@mixin anms-common-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-bg {
+    &--primary {
+      background: mat-color($primary);
+      color: mat-color($primary, default-contrast) !important;
+      
+      &--400 {
+        background-color: mat-color($primary, 400);
+      }
+    }
+
+    &--accent {
+      background: mat-color($accent);
+      color: mat-color($accent, default-contrast) !important;
+    }
+    
+    &--warn {
+      background: mat-color($warn);
+    }
+
+    &--bordered {
+      background-color: transparent;
+      border-radius: 50%;
+      border: 1px solid;
+      border-color: mat-color($foreground, secondary-text);
+       
+      .mat-icon  {
+          color: mat-color($foreground, secondary-text);
+        }
+    }
+  }
+
+  .link { color: #1976d2; }
+  .mat--success {
+    background: #43a047;
+    color: #fff !important;
+
+    .mat-snack-bar-container{
+      background: #43a047 !important;
+      color: #fff !important;
+    }
+    .mat-simple-snackbar-action {
+      color: #fff !important;
+    }
+  }
+  .mat--errors {
+    background: #f44336 !important;
+    color: #fff !important;
+
+    .mat-snack-bar-container {
+      background: #f44336 !important;
+      color: #fff !important;
+    }
+
+    .mat-simple-snackbar-action {
+      color: #fff !important;
+    }
+  }
+
+  .mat-card { 
+    &--bg {
+      background: mat-color($background, card);
+    }
+    .custom__card__footer, .custom__card__actions {
+      a{
+        &:hover {
+          color: mat-color($primary) !important;
+        }
+      }  
+    }
+  }
+  .messages {
+    &.mat-menu-panel {
+      color: mat-color($foreground, 'text');
+    }
+    .footer {
+      a {
+        color: mat-color($foreground, 'text');
+      }
+    }
+  }
+}
+
+ 

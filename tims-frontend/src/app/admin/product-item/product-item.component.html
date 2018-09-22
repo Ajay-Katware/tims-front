@@ -1,0 +1,71 @@
+<mat-card class="list--scroll">
+  <mat-card-header>
+      <mat-card-title> <div class="mt-1">
+        <button mat-raised-button color="accent" class="mr-1" (click)="refresh()">Item List</button>
+        <button mat-raised-button color="accent" class="mr-1" (click)="addNew()">Add Item</button>
+      </div></mat-card-title>
+    </mat-card-header>
+<mat-card-content>
+  <div fxLayout="column">
+    <div>
+      <mat-form-field floatPlaceholder="never" color="accent">
+        <input matInput #filter placeholder="Search Product Item">
+      </mat-form-field>
+      <button mat-icon-button (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+      <ng-container matColumnDef="product">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.productid.productName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="itemcode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Item Code</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.itemCode}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="serialno">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Serial No</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.serialNo}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="barcode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.barcode}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" (click)="addNew()">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent" (click)="editItem(row)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="accent" (click)="deleteItem(row.id)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="viewItem(row)"></mat-row>
+    </mat-table>
+
+
+    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+
+    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="8" [pageSizeOptions]="[5, 8, 10, 25, 100, 1000]">
+    </mat-paginator>
+  </div>
+</mat-card-content>
+</mat-card>

@@ -1,0 +1,155 @@
+<mat-card-header>
+  <mat-card-title>Add User</mat-card-title>
+</mat-card-header>
+<mat-card-content class="mb-0 px-1">
+  <form ngClass.gt-xs="px-1" #formControl="ngForm">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput minlength="2" maxlength="30" placeholder="Username" [(ngModel)]="user.username" name="username"
+              type="text" required #username="ngModel">
+            <mat-error [hidden]="username.valid || username.pristine" class="alert alert-danger">
+              User Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput minlength="2" maxlength="30" placeholder="Email" [formControl]="email" [(ngModel)]="user.useremail"
+              name="useremail" type="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <mat-error *ngIf="checkedUsername">Username already taken by someone.</mat-error>
+        <mat-error *ngIf="checkedUseremail">Already have account with this email.</mat-error>
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput minlength="2" maxlength="30" placeholder="First Name" type="text" [(ngModel)]="user.firstname"
+              name="firstname" required #firstname="ngModel">
+            <mat-error [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">
+              First Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput minlength="2" maxlength="30" placeholder="Last Name" type="text" [(ngModel)]="user.lastname"
+              name="lastname" required #lastname="ngModel">
+            <mat-error [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">
+              Last Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+            <input matInput maxlength="30" placeholder="Street No" type="text" [(ngModel)]="user.streetno" name="streetno"
+              required #streetno="ngModel">
+            <mat-error [hidden]="streetno.valid || streetno.pristine" class="alert alert-danger">
+              Street No is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+            <input matInput minlength="2" maxlength="30" placeholder="Street Name" type="text" [(ngModel)]="user.streetname"
+              name="streetname" required #streetname="ngModel">
+            <mat-error [hidden]="streetname.valid || streetname.pristine" class="alert alert-danger">
+              Street Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex.gt-xs="32" fxFlex="100">
+            <input matInput minlength="2" maxlength="30" placeholder="City" type="text" [(ngModel)]="user.city" name="city"
+              required #city="ngModel">
+            <mat-error [hidden]="city.valid || city.pristine" class="alert alert-danger">
+              City is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex.gt-xs="32" fxFlex="100">
+            <mat-select placeholder="Select Country" name="country" [(ngModel)]="user.country" (selectionChange)="onSelect($event.value)"
+              required #country="ngModel">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let obj of countries" [value]="obj">
+                {{ obj }}
+              </mat-option>
+            </mat-select>
+            <mat-error [hidden]="country.valid || country.pristine" class="alert alert-danger">
+              Country is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex.gt-xs="32" fxFlex="100">
+            <mat-select placeholder="Select State" name="province" [(ngModel)]="user.province" required #province="ngModel">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let obj of states" [value]="obj.name">
+                {{ obj.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error [hidden]="province.valid || province.pristine" class="alert alert-danger">
+              State is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex.gt-xs="32" fxFlex="100">
+            <input matInput minlength="2" maxlength="10" placeholder="Postal Code" [(ngModel)]="user.postalcode" name="postalcode"
+              type="text">
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput minlength="2" maxlength="20" placeholder="Contact No" type="text" [(ngModel)]="user.contactno"
+              name="contactno" type="text" required #contactno="ngModel">
+            <mat-error [hidden]="contactno.valid || contactno.pristine" class="alert alert-danger">
+              Contact No is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="role.role==null" fxFlex="100" fxFlex.gt-xs="48.50">
+            <mat-select placeholder="Select Role" [(ngModel)]="user.userrole" name="userrole" required #userrole="ngModel">
+              <mat-option (click)="addRoleDailog()">--ADD NEW--</mat-option>
+              <mat-option *ngFor="let obj of roles" [value]="obj">
+                {{ obj.role }}
+              </mat-option>
+            </mat-select>
+            <mat-error [hidden]="userrole.valid || userrole.pristine" class="alert alert-danger">
+              Role is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="role.role!=null" fxFlex="100" fxFlex.gt-xs="48.50">
+            <mat-select placeholder="Select Role" [(ngModel)]="user.userrole" name="userrole" required>
+              <mat-option [value]="role">{{role.role}}</mat-option>
+              <mat-option (click)="addRoleDailog()">--ADD NEW--</mat-option>
+              <mat-option *ngFor="let obj of roles" [value]="obj">
+                {{ obj.role }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign="start start" fxLayoutGap="5px">
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="Choose Image" readonly #file1 class="pointer--cursor" (click)="upload1.click()">
+            <input [hidden]="true" type="file" #upload1 (change)="uploadFile($event, file1)" />
+          </mat-form-field>
+          <button type="button" mat-button color="accent" mat-mini-fab (click)="upload1.click()">
+            <mat-icon>attachment</mat-icon>
+          </button>
+        </div>
+        <br />
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+        <div>
+          <label class="mr-1 mat-body-3">Gender:</label>
+          <mat-radio-group fxFlex="100" fxLayoutGap=".5rem" [(ngModel)]="user.gender" name="gender" required>
+            <mat-radio-button value="M">Male</mat-radio-button>
+            <mat-radio-button value="F">Female</mat-radio-button>
+            <mat-radio-button value="O">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="ptb-5 mb-1">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="true"
+        (click)="confirmAdd()" class="mr-1">Submit</button>
+      <button mat-raised-button color="accent" (click)="onNoClick()" tabindex="" x="-1" class="mr-1">Cancel</button>
+    </div>
+  </form>
+</mat-card-content>

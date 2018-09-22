@@ -1,0 +1,168 @@
+<mat-toolbar color="primary">
+  <div fxFlex [class.hidden]="displaySearch" fxLayoutAlign="start center">
+    <span matTooltip="Menu" ngClass.gt-xs="pl-1">
+      <button (click)="sidebar.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+    </span>
+    <span fxFlex></span>
+    <!-- <span matTooltip="Search">
+      <button mat-icon-button ngClass.gt-xs="ml-1" ngClass.xs="ml-5" (click)="displaySearch = true">
+        <mat-icon>search</mat-icon>
+      </button>
+    </span> -->
+    <span matTooltip="Change Theme">
+      <button type="button" mat-icon-button ngClass.gt-xs="ml-1" ngClass.xs="ml-5" [matMenuTriggerFor]="colorScheme">
+        <mat-icon>format_color_fill</mat-icon>
+      </button>
+    </span>
+    <mat-menu #colorScheme="matMenu" class="color--scheme" [overlapTrigger]="false">
+      <mat-grid-list cols="2" rowHeight="46px">
+        <mat-grid-tile *ngFor="let theme of themes" (click)="changeTheme(theme)">
+          <div mat-menu-item [title]="theme.name">
+            <div class="swatch" [style.background]="theme.baseColor"></div>
+            <mat-icon class="swatch__active--icon mat-bg--primary" *ngIf="theme.isActive">check</mat-icon>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-menu>
+
+    <!-- <span matTooltip="Messages">
+      <button type="button" mat-icon-button ngClass.gt-xs="ml-1" ngClass.xs="ml-5" [matMenuTriggerFor]="messages" messageAccordian>
+        <mat-icon>mail</mat-icon>
+      </button>
+    </span> -->
+
+    <mat-menu #messages="matMenu" class="messages" [overlapTrigger]="false">
+      <div (click)="$event.stopPropagation()">
+        <div class="header">
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="pl-1">
+            <div fxLayoutAlign="center start" fxLayout="column">
+              <h4 class="m-0">Messages</h4>
+              <div class="mat-hint mat-caption line-height-12"> You have 4 messages.</div>
+            </div>
+            <span fxFlex></span>
+            <button mat-icon-button class="mr-5">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <perfect-scrollbar>
+          <div class="messages__content pointer--cursor pl-1 pr-1" [style.height]="'300px'">
+            <div fxLayout="row" fxLayoutAlign="space-between center" [class.hidden]="removeMessage">
+              <div fxLayoutAlign="center center" class="mat-bg--primary border-radius--50 mr-5">
+                <mat-icon>settings</mat-icon>
+              </div>
+              <div>
+                <div class="mat-body-1">New user registered</div>
+                <div class="mat-hint mat-caption line-height-12"> 20 min ago</div>
+              </div>
+              <span fxFlex></span>
+              <button mat-icon-button (click)="removeMessage = true">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayoutAlign="center center" class="mr-5 mat-bg--bordered">
+                <mat-icon>settings</mat-icon>
+              </div>
+              <div>
+                <div class="mat-body-1">John added you as a friend.</div>
+                <div class="mat-hint mat-caption line-height-12"> 2 hours ago</div>
+              </div>
+              <span fxFlex></span>
+              <button mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayoutAlign="center center" class="mat-bg--primary border-radius--50 mr-5">
+                <mat-icon>settings</mat-icon>
+              </div>
+              <div>
+                <div class="mat-body-1">New user registered</div>
+                <div class="mat-hint mat-caption line-height-12"> 20 min ago</div>
+              </div>
+              <span fxFlex></span>
+              <button mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayoutAlign="center center" class="mat-bg--primary border-radius--50 mr-5">
+                <mat-icon>settings</mat-icon>
+              </div>
+              <div>
+                <div class="mat-body-1">John added you as a friend.</div>
+                <div class="mat-hint mat-caption line-height-12"> 2 hours ago</div>
+              </div>
+              <span fxFlex></span>
+              <button mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayoutAlign="center center" class="mat-bg--primary border-radius--50 mr-5">
+                <mat-icon>settings</mat-icon>
+              </div>
+              <div>
+                <div class="mat-body-1">New user registered</div>
+                <div class="mat-hint mat-caption line-height-12"> 20 min ago</div>
+              </div>
+              <span fxFlex></span>
+              <button mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayoutAlign="center center" class="mat-bg--primary mr-5 border-radius--50">
+                <mat-icon>settings</mat-icon>
+              </div>
+              <div>
+                <div class="mat-body-1">John added you as a friend.</div>
+                <div class="mat-hint mat-caption line-height-12"> 2 hours ago</div>
+              </div>
+              <span fxFlex></span>
+              <button mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+        </perfect-scrollbar>
+        <mat-divider></mat-divider>
+        <div class="footer" fxLayoutAlign="center center">
+          <a routerLink="" class="mat-caption mt-5">Mark all as read</a>
+        </div>
+      </div>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user__icon" ngClass.gt-xs="ml-1" ngStyle.xs="min-width: auto">
+      <img mat-card-avatar src="data:image/png;base64,{{user.picture != null ? user.picture : generic.PROFILE_PIC}}">
+      <span fxHide.xs class="ml-5">{{user.firstname}} {{user.lastname}}</span>
+      <mat-icon fxHide.xs>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+      <a routerLink="profile" mat-menu-item>
+        <mat-icon>account_circle</mat-icon><span>My Profile</span>
+      </a>
+      <button mat-menu-item (click)="openUpdatePasswordDialog()">
+        <mat-icon>lock</mat-icon><span>Update Password</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon><span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <div class="searchbar expanded px-1" [class.hidden]="!displaySearch" fxLayout="row" fxFlex fxLayoutAlign="start center">
+    <input fxFlex type="text" name="search" placeholder="Search" class="ml-1">
+    <button mat-icon-button (click)="displaySearch = false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

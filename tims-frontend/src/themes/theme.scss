@@ -1,0 +1,68 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import 'default-theme.scss';
+@import 'light-theme.scss';
+@import 'black-theme.scss';
+
+$general-typography: mat-typography-config(
+  $subheading-2:  mat-typography-level(14px, 28px, 400)
+);
+
+// Be sure that you only ever include this mixin once!
+@include mat-core($general-typography);
+@include mat-base-typography($general-typography);
+
+@import 'quill-editor/quill-editor.scss';
+@import 'common/common.scss';
+
+@import 'src/app/admin/chat/chat.component.scss-theme.scss';
+@import 'src/app/admin/profile/profile.component.scss-theme.scss';
+@import 'src/app/admin/layout/header/header.component.scss-theme.scss';
+@import 'src/app/admin/grid-system/grid-system.component.scss-theme.scss';
+
+@mixin custom-components-theme($theme) {
+
+  // Quill Editor
+  @include anms-quill-editor-theme($theme);
+
+  @include anms-common-theme($theme);
+
+  @include anms-chat-component-theme($theme);
+  @include anms-profile-component-theme($theme);
+  @include anms-header-component-theme($theme);
+  @include anms-gridSystem-component-theme($theme);
+}
+
+.default-theme {
+  $primary: map-get($anms-theme, primary);
+
+  @include angular-material-theme($anms-theme);
+  @include custom-components-theme($anms-theme);
+
+  .mat-brand-bg{
+    background: mat-color($primary, 50);
+  }
+}
+
+.light-theme {
+
+  $primary: map-get($anms-light-theme, primary);
+
+  @include angular-material-theme($anms-light-theme);
+  @include custom-components-theme($anms-light-theme);
+
+  .mat-brand-bg{
+    background: mat-color($primary, 50);
+  }
+}
+
+.black-theme {
+  $background: map-get($anms-black-theme, background);
+  .mat-brand-bg{
+    background: mat-color($background, card);
+  }
+   @include angular-material-theme($anms-black-theme);
+   @include custom-components-theme($anms-black-theme);
+}

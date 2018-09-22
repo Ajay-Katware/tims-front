@@ -1,0 +1,84 @@
+<mat-card class="list--scroll">
+  <mat-card-header>
+      <mat-card-title> <div class="mt-1">
+        <button mat-raised-button color="accent" class="mr-1" (click)="refresh()">Packages</button>
+        <button mat-raised-button color="accent" class="mr-1" routerLink="add">Create Package</button>
+      </div></mat-card-title>
+    </mat-card-header>
+<mat-card-content>
+  <div fxLayout="column">
+    <div>
+      <mat-form-field floatPlaceholder="never" color="accent">
+        <input matInput #filter placeholder="Search Package">
+      </mat-form-field>
+      <button mat-icon-button (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+      
+      <ng-container matColumnDef="packagedate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.packagedate}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="salesorderno">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Sales Order#</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.salesorderid.salesorderno}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="packageno">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Package No#</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.packageno}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="customername">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Customer Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.salesorderid.customerid.salutation}} {{row.salesorderid.customerid.firstname}} {{row.salesorderid.customerid.lastname}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.delivered == 'N'?'Not Delivered' : 'Delivered'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="totalqty">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Qty</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.totalqty}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" routerLink="add">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent" [routerLink]="['edit', row.id]">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="accent" (click)="deleteItem(row.id)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+
+          <button mat-icon-button color="accent" (click)="createshipment(row.id)">
+              <mat-icon aria-label="travel">delete</mat-icon>
+            </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewPackage(row.id)"></mat-row>
+    </mat-table>
+
+    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+
+    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="8" [pageSizeOptions]="[5, 8, 10, 25, 100, 1000]">
+    </mat-paginator>
+  </div>
+</mat-card-content>
+</mat-card>

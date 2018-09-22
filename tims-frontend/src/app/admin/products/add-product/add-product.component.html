@@ -1,0 +1,103 @@
+<!-- <div>
+    <div fxLayout="column"> -->
+<!-- <mat-card class="default"> -->
+<mat-card-header>
+  <mat-card-title>{{headingName}} product</mat-card-title>
+</mat-card-header>
+<mat-card-content class="mb-0 px-1">
+  <form ngClass.gt-xs="px-1" #formControl="ngForm">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput placeholder="Product Code" [(ngModel)]="product.productCode" name="productCode"
+              type="text" required #productcode="ngModel">
+            <mat-error [hidden]="productcode.valid || productcode.pristine" class="alert alert-danger">
+              Product Code is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput placeholder="Product Name" [(ngModel)]="product.productName" name="productName"
+              type="text" required #productname="ngModel">
+            <mat-error [hidden]="productname.valid || productname.pristine" class="alert alert-danger">
+              Product Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!-- <mat-error *ngIf="checkedproductname">productname already taken by someone.</mat-error>
+          <mat-error *ngIf="checkedproductemail">Already have account with this email.</mat-error> -->
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="100">
+            <textarea matInput placeholder="Product Description" type="text" [(ngModel)]="product.productDescription"
+              name="productDescription" required #desc="ngModel"></textarea>
+            <mat-error [hidden]="desc.valid || desc.pristine" class="alert alert-danger">
+              Product Description is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput minlength="2" placeholder="Manufacturer" type="text" [(ngModel)]="product.manufacturer" name="manufacturer"
+              required #manufacturer="ngModel">
+            <mat-error [hidden]="manufacturer.valid || manufacturer.pristine" class="alert alert-danger">
+              Manufacturer is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex.gt-xs="48.50" fxFlex="100">
+            <input matInput minlength="2" placeholder="Brand" type="text" [(ngModel)]="product.brand" name="brand" >
+          </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex.gt-xs="48.50" fxFlex="100">
+            <input matInput placeholder="Purchase Price" type="text" [(ngModel)]="product.purchasePrice"
+              name="purchasePrice" required #purchasePrice="ngModel">
+            <mat-error [hidden]="purchasePrice.valid || purchasePrice.pristine" class="alert alert-danger">
+              Purchase Price is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput placeholder="Selling Price" type="text" [(ngModel)]="product.sellingPrice" name="sellingPrice"
+              required #sellingPrice="ngModel">
+            <mat-error [hidden]="sellingPrice.valid || sellingPrice.pristine" class="alert alert-danger">
+              Selling Price is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+            <input matInput placeholder="Unit" type="text" [(ngModel)]="product.unit" name="unit" required
+              #unit="ngModel">
+            <mat-error [hidden]="unit.valid || unit.pristine" class="alert alert-danger">
+              Unit is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+            <input matInput placeholder="Opening Stock" type="text" [(ngModel)]="product.openingStock" name="openingStock"
+              required #openingStock="ngModel">
+            <mat-error [hidden]="openingStock.valid || openingStock.pristine" class="alert alert-danger">
+              Opening Stock is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex.gt-xs="32" fxFlex="100">
+            <input matInput placeholder="Reorder Level" type="text" [(ngModel)]="product.reorderLevel" name="reorderLevel"
+              required #reorderLevel="ngModel">
+            <mat-error [hidden]="reorderLevel.valid || reorderLevel.pristine" class="alert alert-danger">
+              Reorder Level is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="ptb-5 mb-1">
+      <button mat-raised-button color="primary" [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="true" (click)="confirmAdd()" class="mr-1">Submit</button>
+      <button mat-raised-button color="accent" (click)="onNoClick()" tabindex="" x="-1" class="mr-1">Cancel</button>
+    </div>
+  </form>
+</mat-card-content>
+<!-- </mat-card> -->
+<!-- </div>
+    </div> -->

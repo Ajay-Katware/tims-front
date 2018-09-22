@@ -1,0 +1,77 @@
+<mat-card class="list--scroll">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="mt-1">
+        <button mat-raised-button color="accent" class="mr-1" (click)="refresh()">View Users</button>
+        <button mat-raised-button color="accent" class="mr-1" (click)="addNew()">Add User</button>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="column">
+      <div>
+        <mat-form-field floatPlaceholder="never" color="accent">
+          <input matInput #filter placeholder="Search User">
+        </mat-form-field>
+        <button mat-icon-button (click)="refresh()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+      <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+        <ng-container matColumnDef="profilepic">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Image</mat-header-cell>
+          <mat-cell *matCellDef="let row"><img mat-card-avatar src="data:image/png;base64,{{row.picture !== null ? row.picture: generic.PROFILE_PIC}}"></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.firstname}} {{row.lastname}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="useremail">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.useremail}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="userrole">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.userrole.role}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="contactno">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.contactno}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" (click)="addNew()">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.firstname, row.lastname, row.useremail, row.username, row.streetno, row.streetname, row.city, row.postalcode, row.country, row.province, row.contactno, row.gender, row.userrole)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.firstname, row.lastname, 'user')">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="viewUser(row)"></mat-row>
+      </mat-table>
+
+      <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+        No results
+      </div>
+
+      <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="8" [pageSizeOptions]="[5, 8, 10, 25, 100, 1000]">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

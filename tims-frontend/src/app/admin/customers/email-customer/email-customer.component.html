@@ -1,0 +1,64 @@
+<form ngClass.gt-xs="px-1" (ngSubmit)="submit" #formControl="ngForm">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+      <div>
+          <mat-form-field fxFlex="100">
+              <mat-chip-list #chipEmailList>
+                <mat-chip *ngFor="let chip of emailChips" [selected]="chip.selected" [color]="accent" [removable]="removable" (remove)="removeEmail(chip)">
+                  {{chip.name}}
+                  <mat-icon matChipRemove *ngIf="removableEmail">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Send To" [matChipInputFor]="chipEmailList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="addSendtoEmail($event)">
+              </mat-chip-list>
+            </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field fxFlex="100">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let chip of chips" [selected]="chip.selected" [color]="accent" [removable]="removable" (remove)="remove(chip)">
+              {{chip.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Cc" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field fxFlex="100">
+          <input matInput placeholder="Subject" type="text" [(ngModel)]="customerEmail.subject" name="subject">
+        </mat-form-field>
+      </div>
+      <div fxLayout="column">
+        <perfect-scrollbar>
+          <quill-editor [style]="{height:'150px',width:'100%'}" [(ngModel)]="customerEmail.editorHtml" name="editorHtml"
+          (blur)="onEditorBlured($event)"
+          (focus)="onEditorFocused($event)"
+          (ready)="onEditorCreated($event)"
+          (change)="onContentChanged($event)"></quill-editor>
+        </perfect-scrollbar>
+      </div>
+      <br/>
+      <div fxLayoutAlign="start start" fxLayoutGap="5px">
+        <mat-form-field fxFlex="100">
+          <input matInput placeholder="Choose file" readonly #file1 class="pointer--cursor" (click)="upload1.click()">
+          <input [hidden]="true" type="file" #upload1 (change)="uploadFile($event, file1)" />
+        </mat-form-field>
+        <button type="button" mat-raised-button color="accent" (click)="upload1.click()">
+          <mat-icon>attachment</mat-icon>
+        </button>
+      </div>
+      <br/>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-md="30" ngClass.gt-md="pl-1">
+
+    </div>
+  </div>
+
+  <div class="ptb-5 mb-1">
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" [type]="submit" (click)="confirmAdd()" class="mr-1">Send</button>
+    <button mat-raised-button color="accent" (click)="onNoClick()" tabindex="" x="-1">Cancel</button>
+  </div>
+</form>

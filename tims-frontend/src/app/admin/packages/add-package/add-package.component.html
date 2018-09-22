@@ -1,0 +1,104 @@
+<div>
+  <div fxLayout="column">
+    <mat-card class="default">
+      <mat-card-header>
+        <mat-card-title>Create Package</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mb-0 px-1">
+        <form ngClass.gt-xs="px-1" [formGroup]="packageForm">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.gt-md="50" ngClass.gt-md="pr-1">
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="100">
+                  <mat-select placeholder="Select Customer" (selectionChange)="choosedCustomer($event.value)" required>
+                    <mat-option>None</mat-option>
+                    <mat-option [routerLink]="['/admin/customers/add']">--ADD NEW--</mat-option>
+                    <mat-option *ngFor="let obj of customers" [value]="obj.id">
+                      {{ obj.salutation }} {{ obj.firstname }} {{ obj.lastname }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="100">
+                  <mat-select placeholder="Select Sales Order" formControlName="salesorderid" (selectionChange)="choosedSalesOrder()"
+                    required>
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let obj of salesorderlist" [value]="obj.id">
+                      {{ obj.salesorderno }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                  <input matInput placeholder="Package Slip#" type="text" formControlName="packageno" required>
+                </mat-form-field>
+                <mat-form-field fxFlex.gt-xs="48.50" fxFlex="100">
+                  <input matInput [matDatepicker]="picker1" placeholder="Pack Date" [min]="minDate" formControlName="packagedate" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.gt-md="50" ngClass.gt-md="pr-1">
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+              <table *ngIf="visible">
+                <thead>
+                  <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:50%">ITEM DETAILS</th>
+                    <th style="width:15%">QUANTITY ORDERED</th>
+                    <th style="width:15%">QUANTITY PAKCED</th>
+                    <th style="width:15%">QUANTITY TO PACK</th>
+                    <th style="width:3%;" *ngIf="packageForm.controls['orderedItems'].controls.length > 1"></th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="orderedItems">
+                  <tr *ngFor="let address of orderedItems.controls; let i=index" [formGroupName]="i">
+                    <td>{{i+1}}</td>
+                    <td>
+                      <input matInput placeholder="Product" type="text" formControlName="productname" readonly>
+                    </td>
+                    <td>
+                      <input matInput placeholder="Quantity ordered" type="text" formControlName="qtyordered" readonly>
+                    </td>
+                    <td>
+                      <input matInput placeholder="Quantity packed" type="text" formControlName="qtypacked" readonly>
+                    </td>
+                    <td>
+                      <mat-form-field style="width: 70%;">
+                        <input matInput placeholder="Quantity to pack" type="text" formControlName="qtytopack" (keyup.enter)="applyTotal(i)" (blur)="applyTotal(i)" required>
+                      </mat-form-field>
+                    </td>
+                    <td style="width:3%;" *ngIf="packageForm.controls['orderedItems'].controls.length > 1">
+                        <button type="button" mat-button color="accent" (click)="removeAddress(i)" mat-mini-fab>
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                  <textarea matInput placeholder="Packing Notes" type="text" formControlName="packagenotes"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="ptb-5 mb-1">
+                <button mat-raised-button color="primary" type="submit" class="mr-1" (click)="confirmAdd()" [disabled]="!packageForm.valid">Save</button>
+                <button mat-raised-button color="accent" (click)="goBack()" type="button">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<!-- <pre>Form value: {{ packageForm.value | json }}</pre> -->

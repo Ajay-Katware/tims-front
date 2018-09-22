@@ -1,0 +1,163 @@
+<mat-card class="default chat-container" ngStyle.gt-sm="height:calc(100vh - 180px)">
+  <mat-sidenav-container>
+    <mat-sidenav [opened]="!isMobile()" [mode]="isMobile() ? 'over' : 'side'" position="start" #chat fxFlex.gt-sm="300px" fxFlex="250px"
+      fxLayout="column">
+      <perfect-scrollbar>
+        <div fxLayout="column">
+          <mat-toolbar color="accent" fxFlex="64px">
+            <form fxFlex="100" class="chat--search-form">
+              <div class="mat-elevation-z1" fxLayout="row" fxLayoutAlign="stretch center">
+                <mat-icon class="mat-hint">search</mat-icon>
+                <input type="text" placeholder="Search product name" class="mat-body-1 ml-5" fxFlex="100">
+              </div>
+            </form>
+          </mat-toolbar>
+          <mat-nav-list fxFlex class="p-0">
+            <div *ngFor="let obj of products">
+              <a mat-list-item (click)="selectProduct(obj)">
+                <h4 mat-line>{{obj.productName}}</h4>
+                <p mat-line class="mat-hint">{{obj.productCode}}</p>
+              </a>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-nav-list>
+        </div>
+      </perfect-scrollbar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div fxLayout="column" fxLayoutWrap="wrap">
+        <div fxFlex.gt-sm="calc(100vh - 180px)" fxLayout="column" fxFlex="calc(100vh - 120px)">
+          <mat-toolbar color="accent" fxFlex="64px">
+            <button mat-icon-button class="mr-1" (click)="chat.toggle()">
+              <mat-icon>short_text</mat-icon>
+            </button>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div fxLayout="column" *ngIf="selectedProduct!=null">
+                <h4 mat-line>{{selectedProduct.productName}}</h4>
+              </div>
+            </div>
+            <span fxFlex></span>
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user__icon" ngClass.gt-xs="ml-1" ngStyle.xs="min-width: auto">
+              <span fxHide.xs class="ml-5">Add Item</span>
+            </button>
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+              <button mat-menu-item (click)="addMutipleCateringService()">
+                <mat-icon>add</mat-icon>
+                <span>Add Item</span>
+              </button>
+            </mat-menu>
+            <span>
+              <button type="button" mat-icon-button ngClass.gt-xs="ml-1" ngClass.xs="ml-5" (click)="editProduct()">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </span>
+            <span>
+              <button type="button" mat-icon-button ngClass.gt-xs="ml-1" ngClass.xs="ml-5" (click)="deleteProduct()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </span>
+          </mat-toolbar>
+          <div class="conversation__block" fxFlex fxLayoutWrap="wrap">
+            <div fxLayout="column">
+              <perfect-scrollbar>
+                <div fxLayout="column" class="p-1">
+                  <div fxLayout="row" fxLayoutWrap="wrap" style="width: 1000px;">
+                    <div fxFlex="100" fxFlex.gt-sm="350px" fxFlex.sm="100" fxLayoutWrap="Wrap" fxLayoutAlign.gt-sm="start start">
+                      <div fxFlex.sm="50" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign.xs="end start">
+                        <!-- <mat-card class="default" fxFlex.xs="100">
+                            <mat-card-header>
+                              <mat-card-title>{{cateringRegistration.cateringname}}</mat-card-title>
+                            </mat-card-header>
+                            <mat-list class="icon--48">
+                              <mat-list-item>
+                                <mat-icon>email</mat-icon>{{cateringRegistration.emailid}}
+                              </mat-list-item>
+                              <mat-list-item>
+                                <mat-icon>phone</mat-icon>{{cateringRegistration.contactno}}
+                              </mat-list-item>
+                              <mat-list-item>
+                                <mat-icon>add_location</mat-icon>{{cateringRegistration.billcity}}
+                              </mat-list-item>
+                            </mat-list>
+                          </mat-card> -->
+                      </div>
+                    </div>
+                    <div fxFlex.gt-sm="calc(100%-350px)" fxFlex="100" fxLayoutWrap="Wrap">
+                      <div fxFlex.gt-md="100" fxFlex="100" fxLayoutWrap="wrap" fxLayoutAlign="column" fxLayoutAlign.gt-sm="end start">
+                        <!-- <mat-accordion fxLayoutGap="1em" fxLayout="column">
+                                  <mat-expansion-panel expanded="false">
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Address
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                     <h4>Billing Address</h4>
+                                     <p>{{cateringRegistration.billstreetno}} {{cateringRegistration.billstreetname}}<br/>
+                                      {{cateringRegistration.billcity}} {{cateringRegistration.billstate}} {{cateringRegistration.billpostalcode}}
+                                    </p>
+                                     <h4>Shipping Address</h4>
+                                     <p>{{cateringRegistration.shipstreetno}} {{cateringRegistration.shipstreetname}}<br/>
+                                      {{cateringRegistration.shipcity}} {{cateringRegistration.shipstate}} {{cateringRegistration.shippostalcode}}
+                                    </p>
+                                  </mat-expansion-panel>
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Other Details
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <h4>Minimum Guest <br/>{{cateringRegistration.minguest}} </h4>
+                                    <h4>Maximum Guest<br/>{{cateringRegistration.maxguest}} </h4>
+                                    Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus.                                </mat-expansion-panel>
+                                </mat-accordion> -->
+                      </div>
+                    </div>
+                    <div fxFlex="100">
+                      <mat-card class="default list--scroll">
+                        <mat-card-header>
+                          <mat-card-title>
+                            Item List
+                          </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                          <!-- <div>
+                            <mat-form-field fxFlex="30" fxFlex.xs="100">
+                              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                          </div> -->
+                          <mat-table #table [dataSource]="dataSource">
+                            <ng-container matColumnDef="position">
+                              <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+                              <mat-cell *matCellDef="let element ; let i=index;">{{i+1}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="serialNo">
+                              <mat-header-cell *matHeaderCellDef>Serial No</mat-header-cell>
+                              <mat-cell *matCellDef="let element ;">{{element.serialNo}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="itemCode">
+                              <mat-header-cell *matHeaderCellDef>Item Code</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.itemCode}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="barcode">
+                              <mat-header-cell *matHeaderCellDef>Barcode</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.barcode}}</mat-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                          </mat-table>
+
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </perfect-scrollbar>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</mat-card>

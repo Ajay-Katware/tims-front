@@ -1,0 +1,112 @@
+<mat-card class="list--scroll">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="mt-1">
+        <button mat-raised-button color="accent" class="mr-1" (click)="refresh()">Sales Orders</button>
+        <button mat-raised-button color="accent" class="mr-1" routerLink="add">Create Sales Order</button>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="column">
+      <div>
+        <mat-form-field floatPlaceholder="never" color="accent">
+          <input matInput #filter placeholder="Search Sales Order">
+        </mat-form-field>
+        <button mat-icon-button (click)="refresh()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+      <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+        <ng-container matColumnDef="orderdate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.orderdate}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="salesorderno">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Sales Order#</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.salesorderno}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="reference">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Reference#</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.reference}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customername">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Customer Name</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.customerid.salutation}} {{row.customerid.firstname}} {{row.customerid.lastname}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.total}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="invoice">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Invoiced</mat-header-cell>
+          <mat-cell *matCellDef="let row"><mat-chip-list><mat-chip color="primary" selected="true">{{row.invoiceno !=null ? "YES":"NO"}}</mat-chip></mat-chip-list></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" routerLink="add">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="accent" (click)="editSalesOrder(row.id)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="accent" (click)="deleteItem(row.id)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a mat-menu-item [routerLink]="['viewcandidates', {'id': row.id}]">
+                <mat-icon>account_box</mat-icon>
+                <span>Create Package</span>
+              </a>
+              <a mat-menu-item [routerLink]="['viewfoodplan', {'id': row.id}]">
+                <mat-icon>party_mode</mat-icon>
+                <span>Create Shipment</span>
+              </a>
+              <button mat-menu-item (click)="createInvoice(row.id)">
+                <mat-icon>home</mat-icon>
+                <span>Create Invoice</span>
+              </button>
+              <button mat-menu-item (click)="emergencymail(row)">
+                <mat-icon>notification_important</mat-icon>
+                <span>Emergency Email</span>
+              </button>
+              <button mat-menu-item (click)="deleteItem(row.id)">
+                <mat-icon>close</mat-icon>
+                <span>Deactivate SO</span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+        No results
+      </div>
+
+      <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="8" [pageSizeOptions]="[5, 8, 10, 25, 100, 1000]">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,24 @@
+
+    <div fxLayout="column" [style.padding]="'.33rem'">
+      <div fxLayoutAlign="end center" fxLayout="row">
+        <mat-form-field fxFlex.gt-xs="35">
+          <div>
+            <input matInput type='text' placeholder='Type to filter the name column...' (keyup)='updateFilter($event)' />
+          </div>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100">
+        <ngx-datatable
+          #table
+          class='material'
+          [columns]="columns"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="10"
+          [rows]='rows'
+          [scrollbarH]="true" >
+        </ngx-datatable>
+      </div>
+    </div>

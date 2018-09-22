@@ -1,0 +1,162 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="100" fxFlex.gt-sm="350px" fxFlex.sm="100" fxLayoutWrap="Wrap" fxLayoutAlign.gt-sm="start start">
+    <div fxFlex.sm="50" fxFlex="100" fxFlex.gt-md="100">
+      <mat-card class="mat-bg--primary">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div class="profile-menu__list">
+            <button mat-icon-button [matMenuTriggerFor]="taskOptions" class="task__options">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #taskOptions="matMenu">
+              <button mat-menu-item>
+                <mat-icon>close</mat-icon>
+                <span>Suspend</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+          <!-- <div class="profile__pic">
+            <img src="assets/images/avataar.png">
+          </div> -->
+          <h3 class="mat-h3--light text-center mb-0 mt-5">{{user.firstname}} {{user.lastname}}</h3>
+          <span class="mat-h5">{{user.useremail}}</span>
+        </div>
+        <div class="profile__nav mat-card--bg pt-1 pb-1">
+          <mat-nav-list class="icon--48">
+            <mat-list-item>
+              <mat-icon>email</mat-icon>
+              <div fxLayout="column">
+                <span class="font-weight--500">{{user.useremail}}</span>
+                <span class="mat-hint mat-h5 m-0">Email</span>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <mat-icon>phone</mat-icon>
+              <div fxLayout="column">
+                <span class="font-weight--500">{{user.contactno}}</span>
+                <span class="mat-hint mat-h5 m-0">Phone</span>
+              </div>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div fxFlex.gt-sm="calc(100%-400px)" fxFlex="100" fxLayoutWrap="start start">
+    <div fxFlex.gt-md="50" fxFlex="100">
+      <mat-card class="default" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title>Contact Info</mat-card-title>
+        </mat-card-header>
+        <mat-list class="icon--48">
+          <mat-list-item>
+            <mat-icon>email</mat-icon>{{user.useremail}}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon>phone</mat-icon>{{user.contactno}}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon>add_location</mat-icon>{{user.city}}
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+    <div fxFlex.gt-md="60" fxFlex="100" fxLayoutWrap="wrap" fxLayoutAlign="column" fxLayoutAlign.gt-sm="start start">
+      <div fxFlex="100">
+      </div>
+    </div>
+  </div>
+
+</div>
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="stretch">
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Profile Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mb-0 px-1">
+        <form ngClass.gt-xs="px-1" (ngSubmit)="onSubmit()" #profileForm="ngForm">
+          <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+              <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username" readonly required>
+            </mat-form-field>
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+              <input matInput placeholder="Email" type="text" [(ngModel)]="user.useremail" name="useremail" readonly required>
+            </mat-form-field>
+          </div>
+          <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+              <input matInput placeholder="First Name" type="text" [(ngModel)]="user.firstname" name="firstname" required>
+            </mat-form-field>
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+              <input matInput placeholder="Last Name" type="text" [(ngModel)]="user.lastname" name="lastname" required>
+            </mat-form-field>
+          </div>
+          <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+              <input matInput placeholder="Street No" type="text" [(ngModel)]="user.streetno" name="streetno" required>
+            </mat-form-field>
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="32">
+              <input matInput placeholder="Street Name" type="text" [(ngModel)]="user.streetname" name="streetname" required>
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-xs="32" fxFlex="100">
+              <input matInput placeholder="City" type="text" type="text" [(ngModel)]="user.city" name="city" required>
+            </mat-form-field>
+          </div>
+
+          <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+            <mat-form-field fxFlex.gt-xs="23" fxFlex="100">
+              <mat-select placeholder="Select Country" [(ngModel)]="user.country" name="country" (selectionChange)="onSelect($event.value)"
+                required>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let country of countries" [value]="country">
+                  {{ country }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-xs="23" fxFlex="100">
+              <mat-select placeholder="Select State" [(ngModel)]="user.province" name="province" required>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let obj of states" [value]="obj.name">
+                  {{ obj.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-xs="23" fxFlex="100">
+              <input matInput placeholder="Postal Code" [(ngModel)]="user.postalcode" name="postalcode" type="text">
+            </mat-form-field>
+            <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+              <input matInput placeholder="Contact No" [(ngModel)]="user.contactno" name="contactno" type="text" required>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+              <div>
+                <label class="mr-1 mat-body-3">Gender:</label>
+                <mat-radio-group fxFlex="100" fxLayoutGap=".5rem" [(ngModel)]="user.gender" name="gender">
+                  <mat-radio-button value="M">Male</mat-radio-button>
+                  <mat-radio-button value="F">Female</mat-radio-button>
+                  <mat-radio-button value="O">Other</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="mt-1">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid" class="mr-1">Update</button>
+            <button mat-raised-button color="accent" type="button" (click)="goBack()">Cancel</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

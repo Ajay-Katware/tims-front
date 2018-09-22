@@ -1,0 +1,88 @@
+@mixin anms-profile-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+   .profile__nav {
+      margin: 0 -24px -24px !important;
+      padding: 15px 0 !important;
+
+      @include respond-to('x-small') {
+          margin: 0 -16px -24px !important;
+      }
+      .mat-list-item { height: 52px; }
+      span { line-height: 1.1rem !important; }
+    }
+   .mat-list-item {
+     .task__options { visibility: hidden; }
+      &:hover {
+         background: mat-color($background, hover);
+          .task__options { visibility: visible !important; }
+      }
+    }
+
+    .timeline {
+      position: relative;
+
+       &:before {
+          content: '';
+          position: absolute;
+          top: 2px;
+          bottom: 0;
+          left: 6px;
+          border-left: 2px solid;
+          border-color: mat-color($foreground, divider);
+       }
+       &:after {
+          content: '';
+          position: absolute;
+          @include size(10px);
+          border-radius: 50%;
+          bottom: -13px;
+          left: 0;
+          border: 2px solid;
+          border-color: mat-color($accent);
+          background: #fff;
+       }
+      &__item {
+        position: relative;
+        padding-left: 30px;
+
+          &:before {
+            content: '';
+            position: absolute;
+            @include size(10px);
+            border-radius: 50%;
+            top: 2px;
+            left: 0;
+            border: 2px solid;
+            background: #fff;
+        }
+
+        &:nth-child(4n+1),
+        &:nth-child(4n+2) {
+          &:before { border-color: mat-color($primary); }
+        }
+
+        &:nth-child(4n+3),
+        &:nth-child(4n+4) {
+          &:before { border-color: mat-color($accent); }
+        }
+      }
+      &__body {
+        overflow: hidden;
+        width: 100%;
+
+        &__top { margin-bottom: 8px; }
+        &__content {
+          & :last-child { margin-bottom: 8px; }
+        
+          img { width: 100%; }
+        }
+      }
+    }
+  .mat-row { 
+    &:hover { background: mat-color($background, hover); }
+  }
+}

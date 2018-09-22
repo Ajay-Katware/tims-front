@@ -1,0 +1,29 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+ }
+
+ th {
+    height: 40px;
+    background-color: #8799f3;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+    font-weight: 500;
+}
+
+tbody td {
+    height: 30px;
+}
+
+tfoot td{
+    border-left: none;
+    border-right: none;
+    height: 30px;
+}

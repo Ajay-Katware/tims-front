@@ -1,0 +1,52 @@
+<mat-card-header>
+  <mat-card-title>Add Product Item</mat-card-title>
+</mat-card-header>
+<mat-card-content class="mb-0 px-1">
+  <form ngClass.gt-xs="px-1" (ngSubmit)="onSubmit()" [formGroup]="productItemForm">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="100">
+            <mat-select placeholder="Select Product" formControlName="productid" required>
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let obj of products" [value]="obj.id">
+                {{ obj.productName }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error [hidden]="productcode.valid || productcode.pristine" class="alert alert-danger">
+                Product Code is required
+              </mat-error> -->
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput placeholder="Item code" type="text" formControlName="itemCode" required>
+            <!-- <mat-error [hidden]="productname.valid || productname.pristine" class="alert alert-danger">
+                      Product Name is required
+                    </mat-error> -->
+          </mat-form-field>
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+            <input matInput placeholder="Serial No" type="text" formControlName="serialNo" required>
+            <!-- <mat-error [hidden]="productname.valid || productname.pristine" class="alert alert-danger">
+                    Product Name is required
+                  </mat-error> -->
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+          <mat-form-field fxFlex="100" fxFlex.gt-xs="100">
+            <input matInput placeholder="Barcode" type="text" formControlName="barcode" required>
+            <!-- <mat-error [hidden]="productname.valid || productname.pristine" class="alert alert-danger">
+                      Product Name is required
+                    </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="ptb-5 mb-1">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!productItemForm.valid" [mat-dialog-close]="true" class="mr-1" (click)="onSubmit()">Submit</button>
+      <button mat-raised-button color="accent" (click)="onNoClick()" tabindex="" x="-1" class="mr-1" type="button">Cancel</button>
+    </div>
+  </form>
+</mat-card-content>
+<!-- {{productItemForm.value | json }} -->

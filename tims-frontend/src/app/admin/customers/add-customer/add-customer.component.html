@@ -1,0 +1,147 @@
+<div>
+  <div fxLayout="column">
+    <mat-card class="default">
+      <mat-card-header>
+        <mat-card-title>Customer Entry</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mb-0 px-1">
+        <form ngClass.gt-xs="px-1" [formGroup]="customerForm">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.gt-md="1" ngClass.gt-md="pr-1">
+            </div>
+            <div fxFlex="100" fxFlex.gt-md="95" ngClass.gt-md="pr-1">
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="10">
+                  <mat-select placeholder="Salutation" formControlName="salutation" required>
+                    <mat-option *ngFor="let option of options" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="40">
+                  <input matInput placeholder="First Name" type="text" formControlName="firstname" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="40">
+                  <input matInput placeholder="Last Name" type="text" formControlName="lastname" required>
+                </mat-form-field>
+              </div>
+              <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+                  <input matInput placeholder="Email" type="text" formControlName="emailid" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+                  <input matInput placeholder="Contact No" formControlName="contactno" type="text" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+                  <input matInput placeholder="Alternate Contact" formControlName="alternatecontact" type="text" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="100" fxFlex.gt-xs="23">
+                  <input matInput placeholder="Fax No" formControlName="faxno" type="text" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <mat-tab-group [selectedIndex]="selectedIndex">
+            <mat-tab label="Tab 1">
+              <ng-template mat-tab-label>Address</ng-template>
+              <div class="p-1">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="100" fxFlex.gt-md="43" ngClass.gt-md="pr-1">
+                    <h4>Billing Address<button mat-button color="primary" type="button" (click)="copyShippingAddress()">
+                        << Copy shipping address>></button></h4>
+                    <div>
+                      <mat-form-field fxFlex="100">
+                        <input matInput placeholder="Address Line 1" type="text" formControlName="billstreetno" required>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field fxFlex="100">
+                        <input matInput placeholder="Address Line 2" type="text" formControlName="billstreetname">
+                      </mat-form-field>
+                    </div>
+                    <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <input matInput placeholder="City" type="text" formControlName="billcity" required>
+                      </mat-form-field>
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <input matInput placeholder="Postal Code" type="text" formControlName="billpostalcode" required>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <mat-select placeholder="Select Country"  formControlName="billcountry"  (selectionChange)="onSelect($event.value)" required>
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let obj of countries" [value]="obj">
+                            {{ obj }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                     
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <mat-select placeholder="Select State" formControlName="billstate" required>
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let obj of states" [value]="obj.name">
+                            {{ obj.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxFlex="100" fxFlex.gt-md="5" ngClass.gt-md="pr-1">
+                      
+                  </div>
+                  <div fxFlex="100" fxFlex.gt-md="43" ngClass.gt-md="pl-1">
+                      <h4>Shiping Address<button mat-button color="primary" type="button" (click)="copyBillingAddress()">
+                          << Copy billing address>></button></h4>
+                    <div>
+                      <mat-form-field fxFlex="100">
+                        <input matInput placeholder="Address Line 1" type="text" formControlName="shipstreetno" required>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field fxFlex="100">
+                        <input matInput placeholder="Address Line 2" type="text" formControlName="shipstreetname">
+                      </mat-form-field>
+                    </div>
+                    <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <input matInput placeholder="City" type="text" formControlName="shipcity" required>
+                      </mat-form-field>
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <input matInput placeholder="Postal Code" type="text" formControlName="shippostalcode" required>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayoutAlign.gt-xs="space-between start" fxLayout.xs="column">
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <mat-select placeholder="Select Country"  formControlName="shipcountry"  (selectionChange)="onSelectShipCountry($event.value)" required>
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let obj of countries" [value]="obj">
+                            {{ obj }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                     
+                      <mat-form-field fxFlex="100" fxFlex.gt-xs="48.50">
+                        <mat-select placeholder="Select State" formControlName="shipstate" required>
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let obj of shipstates" [value]="obj.name">
+                            {{ obj.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="ptb-5 mb-1">
+                  <button mat-raised-button color="primary" type="submit" class="mr-1" (click)="confirmAdd()" [disabled]="!customerForm.valid">Submit</button>
+                  <button mat-raised-button color="accent" (click)="onNoClick()" type="button">Cancel</button>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<!-- <p>Form value: {{ customerForm.value | json }}</p>  -->
