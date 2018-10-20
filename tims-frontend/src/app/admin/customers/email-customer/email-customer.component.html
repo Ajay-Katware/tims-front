@@ -1,4 +1,4 @@
-<form ngClass.gt-xs="px-1" (ngSubmit)="submit" #formControl="ngForm">
+<form ngClass.gt-xs="px-1" #formControl="ngForm">
   <div fxLayout="row" fxLayoutWrap="wrap">
     <div fxFlex="100" fxFlex.gt-md="100" ngClass.gt-md="pr-1">
       <div>
@@ -58,7 +58,7 @@
   </div>
 
   <div class="ptb-5 mb-1">
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" [type]="submit" (click)="confirmAdd()" class="mr-1">Send</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit" (click)="confirmAdd()" class="mr-1">Send</button>
     <button mat-raised-button color="accent" (click)="onNoClick()" tabindex="" x="-1">Cancel</button>
   </div>
 </form>

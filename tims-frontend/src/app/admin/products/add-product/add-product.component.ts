@@ -17,7 +17,7 @@ export class AddProductComponent implements OnInit {
   private productService:ProductService) { }
 
   ngOnInit() {
-    if(this.data.product!=null){
+    if(this.data!=null){
       this.product = this.data.product;
       this.headingName = "Edit";
     }
@@ -28,7 +28,6 @@ export class AddProductComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-    console.log(JSON.stringify(this.product));
     this.productService.addProduct(this.product);
   }
 

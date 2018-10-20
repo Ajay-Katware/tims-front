@@ -1,58 +1,115 @@
-<div id="contentToConvert">
-    <mat-card _ngcontent-c18="" class="mat-card">
-        <mat-card-content _ngcontent-c18="" class="py-1 mat-card-content">
-            <div _ngcontent-c18="" class="mb-1">
-                <h1 _ngcontent-c18="" class="mt-0"><strong _ngcontent-c18="">INVOICE</strong></h1><a _ngcontent-c18="" href="javascript:;">company@address.com</a></div>
-            <div _ngcontent-c18="" fxlayout="row wrap" style="flex-flow: row wrap; box-sizing: border-box; display: flex;">
-                <div _ngcontent-c18="" fxflex="100" fxflex.gt-xs="50" style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
-                    <h4 _ngcontent-c18="" class="my-0">Client</h4>
-                    <div _ngcontent-c18="" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;"><span
-                            _ngcontent-c18="">Invoice No: #0001</span><span _ngcontent-c18="">Date issued: 01 Jun 2017</span><span
-                            _ngcontent-c18="">Due date: 31 May 2017</span></div>
+<mat-card>
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div id="contentToConvert">
+        <mat-card-content class="mb-0 px-1">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxflex="100" fxflex.gt-xs="50" style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+                    <img src="assets/images/logo.png">
                 </div>
-                <div _ngcontent-c18="" class="text-sm-right text-xs-left" fxflex="100" fxflex.gt-xs="50" style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
-                    <h4 _ngcontent-c18="" class="my-0">Company LLC</h4>
-                    <div _ngcontent-c18="" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;"><span
-                            _ngcontent-c18="">company@address.com</span><span _ngcontent-c18="">1234 Main</span><span _ngcontent-c18="">Apt.
-                            4B
-                        </span><span _ngcontent-c18="">Springfield, ST 54321</span></div>
+                <div fxflex="100" fxflex.gt-xs="50" style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+                    <h1 class="mt-0"><strong>INVOICE</strong></h1>
+                    <div fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                        <span><strong>Invoice #: </strong>{{salesOrder.invoiceno}}</span>
+                        <span><strong>Order No #: </strong>{{salesOrder.salesorderno}}</span>
+                        <span><strong>Invoice Date#: </strong>{{salesOrder.orderdate}}</span>
+                        <span><strong>Due Date#: </strong>{{salesOrder.expecteddate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxflex="100" fxflex.gt-xs="50" style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+                    <h4>Bill To</h4>
+                    <div fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                        <span><strong>{{salesOrder.customerid.firstname}} {{salesOrder.customerid.lastname}}</strong></span>
+                        <span>{{salesOrder.customerid.billstreetno}} {{salesOrder.customerid.billstreetname}}</span>
+                        <span>{{salesOrder.customerid.billcity}} {{salesOrder.customerid.billpostalcode}}
+                            {{salesOrder.customerid.billstate}} {{salesOrder.customerid.billcountry}} </span>
+                        <span>{{salesOrder.customerid.contactno}}</span>
+                    </div>
+                </div>
+                <div fxflex="100" fxflex.gt-xs="50" style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+                    <h4>Ship To</h4>
+                    <div fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                        <span><strong>{{salesOrder.customerid.firstname}} {{salesOrder.customerid.lastname}}</strong></span>
+                        <span>{{salesOrder.customerid.billstreetno}} {{salesOrder.customerid.billstreetname}}</span>
+                        <span>{{salesOrder.customerid.billcity}} {{salesOrder.customerid.billpostalcode}}
+                            {{salesOrder.customerid.billstate}} {{salesOrder.customerid.billcountry}} </span>
+                        <span>{{salesOrder.customerid.contactno}}</span>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h4>Item Details</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:5%">&nbsp;#</th>
+                        <th style="width:40%">ITEM</th>
+                        <th style="width:10%">QTY</th>
+                        <th style="width:10%">UNIT</th>
+                        <th style="width:10%">RATE</th>
+                        <th style="width:10%">DIS(%)</th>
+                        <th style="width:15%">AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:5%">1</td>
+                        <td style="width:40%">TJSHDP1000 Tejovat Smart Video Doorbell</td>
+                        <td style="width:10%">2</td>
+                        <td style="width:10%">EACH</td>
+                        <td style="width:10%">10000</td>
+                        <td style="width:10%">0.0</td>
+                        <td style="width:15%">20000</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+        </mat-card-content>
+        <hr>
+        <!-- <mat-card-content class="mb-0 px-1">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div class="mt-1 mb-1" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50" style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
+                    <h6 class="text-uppercase text-md ma-0 text-bold">Subtotal</h6>
+                    <h1 class="ma-0">$3,633.61</h1>
+                </div>
+                <div class="mt-1 mb-1 text-sm-right text-md-left" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50"
+                    style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
+                    <h6 class="text-uppercase text-md ma-0 text-bold">Tax (15%)</h6>
+                    <h1 class="ma-0">$545.04</h1>
+                </div>
+                <div class="mt-1 mb-1" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50" style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
+                    <h6 class="text-uppercase text-md ma-0 text-bold">Discount</h6>
+                    <h1 class="ma-0">$0.00</h1>
+                </div>
+                <div class="mt-1 mb-1 text-xs-left text-sm-right" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50"
+                    style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
+                    <h6 class="text-uppercase text-sm ma-0 text-bold">Total</h6>
+                    <h1 class="ma-0 mat-text-accent">$4,178.65</h1>
                 </div>
             </div>
         </mat-card-content>
-        <mat-card-content _ngcontent-c18="" class="pl-0 pr-0 py-1 mat-card-content">
-        </mat-card-content>
-        <hr _ngcontent-c18="">
-        <mat-card-content _ngcontent-c18="" class="py-1 mat-card-content">
-            <div _ngcontent-c18="" fxlayout="row wrap" style="flex-flow: row wrap; box-sizing: border-box; display: flex;">
-                <div _ngcontent-c18="" class="mt-1 mb-1" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50" style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
-                    <h6 _ngcontent-c18="" class="text-uppercase text-md ma-0 text-bold">Subtotal</h6>
-                    <h1 _ngcontent-c18="" class="ma-0">$3,633.61</h1>
-                </div>
-                <div _ngcontent-c18="" class="mt-1 mb-1 text-sm-right text-md-left" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50" style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
-                    <h6 _ngcontent-c18="" class="text-uppercase text-md ma-0 text-bold">Tax (15%)</h6>
-                    <h1 _ngcontent-c18="" class="ma-0">$545.04</h1>
-                </div>
-                <div _ngcontent-c18="" class="mt-1 mb-1" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50" style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
-                    <h6 _ngcontent-c18="" class="text-uppercase text-md ma-0 text-bold">Discount</h6>
-                    <h1 _ngcontent-c18="" class="ma-0">$0.00</h1>
-                </div>
-                <div _ngcontent-c18="" class="mt-1 mb-1 text-xs-left text-sm-right" fxflex="100" fxflex.gt-sm="25" fxflex.gt-xs="50" style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
-                    <h6 _ngcontent-c18="" class="text-uppercase text-sm ma-0 text-bold">Total</h6>
-                    <h1 _ngcontent-c18="" class="ma-0 mat-text-accent">$4,178.65</h1>
-                </div>
+        <hr> -->
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <p><strong> PAYMENT TERMS AND POLICIES </strong> All accounts
+                    are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card or direct
+                    payment
+                    online. If account is not paid within 7 days the credits details supplied as confirmation of work
+                    undertaken
+                    will be charged the agreed quoted fee noted above. If the Invoice remails unpaid. our dept recovery
+                    agency,
+                    Urban, may charge you a fee of 25% of the unpaid portion of the invoice amount and other legal and
+                    collection
+                    costs not covered by the fee. </p>
             </div>
         </mat-card-content>
-        <hr _ngcontent-c18="">
-        <mat-card-content _ngcontent-c18="" class="py-1 mat-card-content">
-            <p _ngcontent-c18="" class="text-md"><strong _ngcontent-c18=""> PAYMENT TERMS AND POLICIES </strong> All accounts
-                are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card or direct payment
-                online. If account is not paid within 7 days the credits details supplied as confirmation of work undertaken
-                will be charged the agreed quoted fee noted above. If the Invoice remails unpaid. our dept recovery agency,
-                Urban, may charge you a fee of 25% of the unpaid portion of the invoice amount and other legal and collection
-                costs not covered by the fee. </p>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div>
-    <input mat-raised-button type="button" value="CAPTURE" (click)="captureScreen()" />
-</div>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" type="button" (click)="printScreen()" class="mr-1">PRINT</button>
+        <button mat-raised-button color="primary" type="button" (click)="captureScreen()" class="mr-1">DOWNLOAD PDF</button>
+        <button mat-raised-button color="accent" type="button" (click)="goBack()">CANCEL</button>
+    </div>
+</mat-card>

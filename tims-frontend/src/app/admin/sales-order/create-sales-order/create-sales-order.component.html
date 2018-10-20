@@ -76,7 +76,7 @@
                           <th style="width:10%">RATE</th>
                           <th style="width:8%">DISCOUNT</th>
                           <th style="width:15%">AMOUNT</th>
-                          <th style="width:3%;" *ngIf="salesOrderForm.controls['orderedItems'].controls.length > 1"></th>
+                          <th style="width:3%;" *ngIf="orderedItems.controls.length > 1"></th>
                         </tr>
                       </thead>
                       <tbody formArrayName="orderedItems">
@@ -110,7 +110,7 @@
                           <td>
                             <input matInput placeholder="Amount" type="text" formControlName="amount" required readonly>
                           </td>
-                          <td style="width:3%;" *ngIf="salesOrderForm.controls['orderedItems'].controls.length > 1">
+                          <td style="width:3%;" *ngIf="orderedItems.controls.length > 1">
                             <button type="button" mat-button color="accent" (click)="removeAddress(i)" mat-mini-fab>
                               <mat-icon>close</mat-icon>
                             </button>
@@ -122,7 +122,7 @@
                           <td colspan="5"></td>
                           <td colspan="2">Subtotal</td>
                           <td><input matInput placeholder="Subtotal" type="text" formControlName="subtotal" required></td>
-                          <td *ngIf="salesOrderForm.controls['orderedItems'].controls.length > 1"></td>
+                          <td *ngIf="orderedItems.controls.length > 1"></td>
                         </tr>
                         <tr>
                           <td colspan="5"></td>
@@ -131,13 +131,13 @@
                               <input matInput placeholder="Tax %" formControlName="taxpercent" type="text" (keyup.enter)="applyTax()" (blur)="applyTax()">
                             </mat-form-field></td>
                           <td><input matInput placeholder="tax value" type="text" formControlName="tax" required></td>
-                          <td *ngIf="salesOrderForm.controls['orderedItems'].controls.length > 1"></td>
+                          <td *ngIf="orderedItems.controls.length > 1"></td>
                         </tr>
                         <tr>
                           <td colspan="5"></td>
                           <td colspan="2">Total</td>
                           <td><input matInput placeholder="total" type="text" formControlName="total" required></td>
-                          <td *ngIf="salesOrderForm.controls['orderedItems'].controls.length > 1"></td>
+                          <td *ngIf="orderedItems.controls.length > 1"></td>
                         </tr>
                       </tfoot>
                     </table>

@@ -3,28 +3,6 @@
     <div fxFlex.sm="50" fxFlex="100" fxFlex.gt-md="100">
       <mat-card class="mat-bg--primary">
         <div fxLayout="column" fxLayoutAlign="center center">
-          <div class="profile-menu__list">
-            <button mat-icon-button [matMenuTriggerFor]="taskOptions" class="task__options">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #taskOptions="matMenu">
-              <button mat-menu-item>
-                <mat-icon>close</mat-icon>
-                <span>Suspend</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>edit</mat-icon>
-                <span>Edit</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>delete</mat-icon>
-                <span>Delete</span>
-              </button>
-            </mat-menu>
-          </div>
-          <!-- <div class="profile__pic">
-            <img src="assets/images/avataar.png">
-          </div> -->
           <h3 class="mat-h3--light text-center mb-0 mt-5">{{user.firstname}} {{user.lastname}}</h3>
           <span class="mat-h5">{{user.useremail}}</span>
         </div>

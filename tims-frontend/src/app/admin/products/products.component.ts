@@ -74,10 +74,9 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  addProduct(product: Product): void {
+  addProduct(): void {
     let dialogRef = this.dialog.open(AddProductComponent, {
       width: "800px;",
-      data: { product: product }
     });
 
     dialogRef.afterClosed().subscribe(result => {

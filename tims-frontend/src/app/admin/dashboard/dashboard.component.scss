@@ -2,6 +2,7 @@
 .mat-card {
   .mat-chip {
       padding: 4px 8px;
+      cursor: pointer;
     }
   }
 
@@ -67,4 +68,8 @@
         padding: 0;
       }
     }
+  }
+
+  .mat-card-content{
+    cursor: pointer;
   }

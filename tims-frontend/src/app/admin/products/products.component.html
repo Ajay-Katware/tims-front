@@ -15,9 +15,6 @@
         <mat-icon>refresh</mat-icon>
       </button>
     </div>
-    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-      <mat-spinner></mat-spinner>
-    </div>
     <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
 
       <ng-container matColumnDef="productCode">

@@ -1,0 +1,43 @@
+
+.example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+ }
+
+ th {
+    height: 40px;
+    background-color: #8799f3;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+    font-weight: 500;
+}
+
+tbody td {
+    height: 40px;
+}
+
+tfoot td{
+    border-left: none;
+    border-right: none;
+    height: 30px;
+}

@@ -1,7 +1,7 @@
 export class RestApi {
 
     public readonly API_URL = 'http://localhost:8083';
-    //public readonly API_URL = 'http://192.168.15.136:8083';
+    //public readonly API_URL = 'http://192.168.15.116:8080/timsrest/';
 
     //LOGIN MODULE API
     public readonly LOGIN_URL = this.API_URL + '/login';

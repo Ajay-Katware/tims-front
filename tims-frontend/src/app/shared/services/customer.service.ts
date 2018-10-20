@@ -11,7 +11,6 @@ export class CustomerService {
   api = new RestApi();
 
   dataChange: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>([]);
-  // Temporarily stores data from dialogs
   dialogData: any;
 
   constructor(private httpClient: HttpClient, private toasterService: ToasterService) { }
