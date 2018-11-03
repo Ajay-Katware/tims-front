@@ -84,6 +84,7 @@ export class ProductsComponent implements OnInit {
       if (result) {
         this.exampleDatabase.dataChange.value.push(this.productService.getDialogData());
         this.refreshTable();
+        this.refresh();
       }
     });
   }
@@ -100,6 +101,7 @@ export class ProductsComponent implements OnInit {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === this.id);
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        this.refresh();
       }
     });
   }

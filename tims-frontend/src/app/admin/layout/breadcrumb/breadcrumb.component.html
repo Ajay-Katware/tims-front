@@ -6,7 +6,7 @@
 <div class="breadcrumb-bar mat-card--bg mat-elevation-z1">
   <ul>
       <li *ngFor="let b of breadcrumbs; let last = last">
-        <a [routerLink]="b.href">{{ b.label }}</a>
+        <a [routerLink]="b.href"></a>
         <span *ngIf="!last" class="separator">/</span>
       </li> 
   </ul>

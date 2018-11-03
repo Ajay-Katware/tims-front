@@ -81,6 +81,7 @@ export class CustomersComponent implements OnInit {
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        this.refresh();
       }
     });
   }

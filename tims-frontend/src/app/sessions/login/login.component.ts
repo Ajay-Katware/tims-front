@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../shared/services/theme.service';
 import { User } from '../../shared/models/user';
-import { UserService } from '../../shared/services/user.service';
 import { LoginService } from '../../shared/services/login.service';
 import { Router } from '@angular/router';
 import { TimsException } from '../../shared/models/tims-exception';
+import { ToasterService } from '../../shared/services/toaster.service';
 
 
 @Component({
@@ -18,8 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
   loggedUser: boolean = false;
   expError: TimsException;
-  isLoadingResults: boolean = false;
-  constructor(private themeService: ThemeService, private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private toasterService:ToasterService) { }
 
   ngOnInit() {
     this.isValidUser();
@@ -30,29 +28,32 @@ export class LoginComponent implements OnInit {
     if (this.loggedUser) {
       this.router.navigateByUrl("/admin/dashboard");
     } else {
-      this.router.navigateByUrl("/admin/login");
+      this.router.navigateByUrl("/sessions/signin");
     }
   }
 
   onSubmit() {
     this.submitted = true;
-    this.isLoadingResults = true;
     this.loginService.login(this.user).subscribe(data => {
-      this.user = data;
-      if (this.user != null) {
-        this.router.navigateByUrl("/admin/dashboard");
+      if (!data) {
+        return;
       } else {
-        this.errorMessage = "Invalid";
+        this.user = data;
+        if (typeof (Storage) !== "undefined") {
+          localStorage.setItem('auth_token', JSON.stringify(data));
+          localStorage.setItem("userid", this.user.id.toString());
+          this.toasterService.openSuccessSnackBar('Login Successful', '', 2000)
+        }
+        if (this.user != null) {
+          this.router.navigateByUrl("/admin/dashboard");
+        } else {
+          this.errorMessage = "Invalid";
+        }
       }
-      this.isLoadingResults = false;
-      this.submitted = false;
     },
       error => {
         this.expError = error.error;
         this.errorMessage = this.expError.errorMessage;
-        this.isLoadingResults = false;
-        this.submitted = false;
       });
   }
-
 }

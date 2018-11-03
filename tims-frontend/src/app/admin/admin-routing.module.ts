@@ -33,97 +33,108 @@ import { CreateInvoiceComponent } from './invoices/create-invoice/create-invoice
 import { PrintInvoiceComponent } from './invoices/print-invoice/print-invoice.component';
 import { AuthGuardService as AuthGuard } from '../shared/services/auth-guard.service';
 import { Breadcrumb } from '../shared/models/breadcrumb';
+import { SetPasswordComponent } from './set-password/set-password.component';
 
 const routes: Routes = [
-	{
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-    },
-    {
-        path: '',
-        component: LayoutComponent,
-        children : [
-            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],  data: {
-                breadcrumbs: [
-                  new Breadcrumb("Home", "/home")
-                ]
-              } },
-            { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
-            { path: 'forms', component: FormsComponent, canActivate: [AuthGuard] },
-            { path: 'tables', component: TablesComponent, canActivate: [AuthGuard]  },
-            { path: 'dialog', component: DialogComponent, canActivate: [AuthGuard]  },
-            { path: 'wizard', component: WizardComponent,canActivate: [AuthGuard]  },
-            { path: 'otherElements', component: OtherElementsComponent, canActivate: [AuthGuard]  },
-            { path: 'datatables', component: DatatablesComponent, canActivate: [AuthGuard]  },
-            { path: 'chat', component: ChatComponent, canActivate: [AuthGuard]  },
-            { path: 'grid-system', component: GridSystemComponent, canActivate: [AuthGuard]  },
-            { path: 'user', component: UserComponent, canActivate: [AuthGuard],
-                data: {
-                breadcrumbs: [
-                  new Breadcrumb("Home", "/home")
-                ]
-              } 
-            },
-            { path: 'role', component: RoleComponent,canActivate: [AuthGuard]  },
-            { path: 'products', component: ProductsComponent,canActivate: [AuthGuard]  },
-            { path: 'products/view/:id', component: ViewProductComponent,canActivate: [AuthGuard]  },
-            { path: 'productitems', component: ProductItemComponent, canActivate: [AuthGuard]  },
-            { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard]  },
-            { path: 'customers/add', component: AddCustomerComponent,canActivate: [AuthGuard]  },
-            { path: 'customers/edit/:id', component: AddCustomerComponent,canActivate: [AuthGuard]  },
-            { path: 'customers/view/:id', component: ViewCustomerComponent, canActivate: [AuthGuard]  },
-            { path: 'salesorders', component:SalesOrderComponent, canActivate: [AuthGuard] },
-            { path: 'salesorders/add', component:CreateSalesOrderComponent, canActivate: [AuthGuard] },
-            { path: 'salesorders/edit', component: CreateSalesOrderComponent ,canActivate: [AuthGuard] },
-            { path: 'salesorders/createinvoice', component: CreateInvoiceComponent, canActivate: [AuthGuard]  },
-            { path: 'packages', component:PackagesComponent, canActivate: [AuthGuard] },
-            { path: 'packages/createshipment', component:CreateShipmentComponent, canActivate: [AuthGuard] },
-            { path: 'packages/add', component:AddPackageComponent, canActivate: [AuthGuard],
-             data: {
-                breadcrumbs: [
-                  new Breadcrumb("Home", "/home")
-                ]
-              }  
-            },
-            { path: 'invoices', component:InvoicesComponent, canActivate: [AuthGuard], 
-            data: {
-                breadcrumbs: [
-                  new Breadcrumb("Home", "/home")
-                ]
-              }  
-            },
-            { path: 'invoices/printinvoice', 
-            component: PrintInvoiceComponent, 
-            canActivate: [AuthGuard],
-            data: {
-                breadcrumbs: [
-                  new Breadcrumb("Home", "/home")
-                ]
-              }  
-            },
-        ]
-    },
-    {
-       path: 'login',
-       component: LoginComponent
-    },
-    {
-       path: 'register',
-       component: RegisterComponent
-    },
-    {
-       path: 'forgot-password',
-       component: ForgotPasswordComponent
-    },
-    {
-       path: 'error',
-       component: ErrorComponent
-    },
-    {
-        path: '**',
-        component: ErrorComponent
-     }
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: {
+          breadcrumbs: [
+            new Breadcrumb("Home", "/home")
+          ]
+        }
+      },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'forms', component: FormsComponent, canActivate: [AuthGuard] },
+      { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
+      { path: 'dialog', component: DialogComponent, canActivate: [AuthGuard] },
+      { path: 'wizard', component: WizardComponent, canActivate: [AuthGuard] },
+      { path: 'otherElements', component: OtherElementsComponent, canActivate: [AuthGuard] },
+      { path: 'datatables', component: DatatablesComponent, canActivate: [AuthGuard] },
+      { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+      { path: 'grid-system', component: GridSystemComponent, canActivate: [AuthGuard] },
+      {
+        path: 'user', component: UserComponent, canActivate: [AuthGuard],
+        data: {
+          breadcrumbs: [
+            new Breadcrumb("Home", "/home")
+          ]
+        }
+      },
+      { path: 'role', component: RoleComponent, canActivate: [AuthGuard] },
+      { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+      { path: 'products/view/:id', component: ViewProductComponent, canActivate: [AuthGuard] },
+      { path: 'productitems', component: ProductItemComponent, canActivate: [AuthGuard] },
+      { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
+      { path: 'customers/add', component: AddCustomerComponent, canActivate: [AuthGuard] },
+      { path: 'customers/edit/:id', component: AddCustomerComponent, canActivate: [AuthGuard] },
+      { path: 'customers/view/:id', component: ViewCustomerComponent, canActivate: [AuthGuard] },
+      { path: 'salesorders', component: SalesOrderComponent, canActivate: [AuthGuard] },
+      { path: 'salesorders/add', component: CreateSalesOrderComponent, canActivate: [AuthGuard] },
+      { path: 'salesorders/edit', component: CreateSalesOrderComponent, canActivate: [AuthGuard] },
+      { path: 'salesorders/createinvoice', component: CreateInvoiceComponent, canActivate: [AuthGuard] },
+      { path: 'packages', component: PackagesComponent, canActivate: [AuthGuard] },
+      { path: 'packages/createshipment', component: CreateShipmentComponent, canActivate: [AuthGuard] },
+      {
+        path: 'packages/add', component: AddPackageComponent, canActivate: [AuthGuard],
+        data: {
+          breadcrumbs: [
+            new Breadcrumb("Home", "/home")
+          ]
+        }
+      },
+      {
+        path: 'invoices', component: InvoicesComponent, canActivate: [AuthGuard],
+        data: {
+          breadcrumbs: [
+            new Breadcrumb("Home", "/home")
+          ]
+        }
+      },
+      {
+        path: 'invoices/printinvoice',
+        component: PrintInvoiceComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumbs: [
+            new Breadcrumb("Home", "/home")
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'setpassword',
+    component: SetPasswordComponent
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
+  },
+  {
+    path: '**',
+    component: ErrorComponent
+  }
 ];
 
 @NgModule({

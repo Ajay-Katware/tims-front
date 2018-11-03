@@ -86,7 +86,9 @@ export class RoleComponent implements OnInit {
       if(result == 1){
         this.exampleDatabase.dataChange.value.push(this.roleService.getDialogData());
         this.refreshTable();
+        this.refresh();
       }
+
     });
   }
 
@@ -124,6 +126,7 @@ export class RoleComponent implements OnInit {
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        this.refresh();
       }
     });
   }
@@ -146,6 +149,7 @@ export class RoleComponent implements OnInit {
         this.exampleDatabase.dataChange.value[foundIndex] = this.roleService.getDialogData();
         // And lastly refresh table
         this.refreshTable();
+        this.refresh();
       }
     });
   }

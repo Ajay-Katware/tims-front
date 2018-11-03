@@ -74,6 +74,7 @@ export class UserComponent implements OnInit {
         if(result){
          this.exampleDatabase.dataChange.value.push(this.userService.getDialogData());
          this.refreshTable();
+         this.refresh();
        }
       });
     }
@@ -95,6 +96,7 @@ export class UserComponent implements OnInit {
           this.exampleDatabase.dataChange.value[foundIndex] = this.userService.getDialogData();
           // And lastly refresh table
           this.refreshTable();
+          this.refresh();
         }
        });
     }
@@ -130,6 +132,7 @@ export class UserComponent implements OnInit {
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        this.refresh();
       }
     });
   }

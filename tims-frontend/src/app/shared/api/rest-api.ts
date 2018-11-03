@@ -8,6 +8,7 @@ export class RestApi {
     public readonly UPDATEPWD_URL = this.API_URL + '/update';
     public readonly FORGOT_URL = this.API_URL + '/forgot';
 
+
     //Dashboard Counterss
     public readonly DASHBOARD_URL = this.API_URL + '/dashboard';
     public readonly COUNTER_URL = this.DASHBOARD_URL + '/counters';
@@ -22,6 +23,8 @@ export class RestApi {
 
     public readonly CHECKUSERBYUSERNAME_URL = this.USER_URL + '/checkUserByUsername';
     public readonly CHECKUSERBYEMAIL_URL = this.USER_URL + '/checkUserByEmail';
+    public readonly CHECKUSERBYTOKEN_URL = this.USER_URL + '/checkUserByToken';
+    public readonly SETPWD_URL = this.USER_URL + '/setpassword';
 
     //PRODUCT URL
     public readonly PRODUCT_URL = this.API_URL + '/products';

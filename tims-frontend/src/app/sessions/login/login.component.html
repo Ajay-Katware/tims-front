@@ -1,13 +1,10 @@
 <div class="mat-bg--primary--400" [style.min-height]="'100vh'" fxFlex="100" fxLayoutAlign="center center">
   <div fxFlex="100" [style.max-width]="'400px'">
-      <div class="example-loading-shade" *ngIf="isLoadingResults">
-          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      </div>
     <mat-card>
       <div class="py-1" ngClass.gt-xs="p-1">
         <div class="logo1 text-center">
           <img src="assets/images/logo.png">
-          <div class="mat-h2 mt-5">Admin login</div>
+          <div class="mat-h2 mt-5">Login to your account</div>
         </div>
         <div class="mt-1">
           <form (ngSubmit)="onSubmit()" #userForm="ngForm">
@@ -26,7 +23,7 @@
             <div fxLayoutAlign="space-between center" fxLayout="row" class="mb-1" fxLayoutGap=".2rem">
               <!-- <mat-checkbox>Remember Me</mat-checkbox> -->
               <span fxFlex></span>
-              <a routerLink="/admin/forgot-password" class="mat-body-1 text-center link" [hidden]="submitted">Forgot Password?</a>
+              <a routerLink="/admin/forgot-password" class="mat-body-1 text-center link">Forgot Password?</a>
             </div>
             <!-- <button type="submit" mat-raised-button color="accent" [disabled]="!userForm.form.valid"  [style.width]="'220px'">Login</button>  -->
             <div fxLayout="column" fxLayoutAlign="center center" class="my-1" fxLayoutGap="1rem">

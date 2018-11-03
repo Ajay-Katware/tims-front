@@ -83,6 +83,7 @@ export class ProductItemComponent implements OnInit {
       if (result) {
         this.exampleDatabase.dataChange.value.push(this.productItemService.getDialogData());
         this.refreshTable();
+        this.refresh();
       }
     });
   }
@@ -98,6 +99,7 @@ export class ProductItemComponent implements OnInit {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === id);
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+        this.refresh();
       }
     });
   }
@@ -117,6 +119,7 @@ export class ProductItemComponent implements OnInit {
         this.exampleDatabase.dataChange.value[foundIndex] = this.productItemService.getDialogData();
         // And lastly refresh table
         this.refreshTable();
+        this.refresh();
       }
     });
   }

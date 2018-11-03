@@ -83,21 +83,19 @@ export class UserService {
 
   uploadImage(id: number, selectedFile: File) {
     const url = `${this.api.USER_IMAGE_URL}/${id}`;
-    if (selectedFile != null) {
+    if (selectedFile !== null) {
       const fd = new FormData();
       fd.append("file", selectedFile, selectedFile.name);
       this.httpClient.post(url, fd).subscribe(result => {
         if (!result) {
           return;
         } else {
-          console.log("Suceessfully Uploaded", result);
         }
       });
     }
   }
 
   deleteUser(id: number): void {
-    console.log("user" + id);
     const url = `${this.api.USER_URL}/${id}`;
 
     this.httpClient.delete(url).subscribe(data => {
@@ -127,6 +125,23 @@ export class UserService {
       (err: HttpErrorResponse) => {
         this.toasterService.openErrorSnackBar('Error occurred. Details: ' + err.name + ' ' + err.message, '', 8000);
       });
+  }
+
+  checkUserByResetToken(resetToken: string): Observable<User> {
+    let httpHeaders = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    let httpParams = new HttpParams()
+      .set('resetToken', resetToken);
+    return this.httpClient.get<User>(this.api.CHECKUSERBYTOKEN_URL, {
+      headers: httpHeaders,
+      params: httpParams,
+      responseType: 'json'
+    });
+  }
+
+  
+  addNewPassword(user: User): Observable<User> {
+    return this.httpClient.post<User>(this.api.SETPWD_URL, user);
   }
 
 }
