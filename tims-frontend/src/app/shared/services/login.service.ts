@@ -74,7 +74,8 @@ export class LoginService {
     return this.loggedIn;
   }
 
-  logout() : boolean{
+  logout() : boolean {
+    localStorage.clear();
     localStorage.removeItem('auth_token');
     localStorage.removeItem("userid");
     this.loggedIn = false;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-password-dailog',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdatePasswordDailogComponent implements OnInit {
 
-  constructor() { }
+  heroForm:FormGroup;
+  userId:number = 0;
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit() {
+    this.userId = JSON.parse(localStorage.getItem('userid'));
+    console.log("this.userId", this.userId);
+    this.creatForm();
+  }
+
+  creatForm(){
+    this.heroForm = this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confPassword: ['', [Validators.required, Validators.minLength(4)]]
+    });
+  }
+
+  onSubmit(){
+    const formModel = this.heroForm.value;
+    let password = formModel.password;
+    console.log("this.password", password);
+    if(this.userId > 0){
+
+    }
   }
 
 }
