@@ -52,7 +52,7 @@ export class CustomerService {
   }
 
   deleteCustomer(id: number): void {
-    console.log("user" + id);
+    console.log('user' + id);
     const url = `${this.api.CUSTOMER_URL}/${id}`;
 
     this.httpClient.delete(url).subscribe(data => {

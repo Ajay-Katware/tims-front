@@ -31,6 +31,7 @@ export class CustomersComponent implements OnInit {
   name: string;
   title:string;
   loggedUser:string;
+ 
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,

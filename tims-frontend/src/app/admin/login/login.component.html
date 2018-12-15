@@ -1,5 +1,14 @@
-<div class="mat-bg--primary--400" [style.min-height]="'100vh'" fxFlex="100" fxLayoutAlign="center center">
+<div class="mat-bg--primary--400" class="hello" [style.min-height]="'100vh'" fxFlex="100" fxLayoutAlign="center center">
   <div fxFlex="100" [style.max-width]="'400px'">
+      <!-- <div [style.max-width]="'400px'">
+          <mat-progress-bar
+           class="example-margin"
+           [color]="color"
+           [mode]="mode"
+           [value]="value"
+           [bufferValue]="bufferValue">
+       </mat-progress-bar>
+       </div> -->
     <div class="example-loading-shade" *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
@@ -26,7 +35,7 @@
                       </mat-error>
                     </mat-error>
                 </mat-form-field>
-              
+
             </div>
             <div>
               <mat-form-field fxFlex="100">

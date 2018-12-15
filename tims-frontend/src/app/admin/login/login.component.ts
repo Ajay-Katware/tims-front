@@ -19,6 +19,12 @@ export class LoginComponent implements OnInit {
   loggedUser: boolean = false;
   expError: TimsException;
   isLoadingResults: boolean = false;
+
+  color = 'primary';
+  mode = 'determinate';
+  value = 50;
+  bufferValue = 75;
+
   constructor(private themeService: ThemeService, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {

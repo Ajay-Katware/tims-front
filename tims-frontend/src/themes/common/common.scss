@@ -22,7 +22,7 @@ $breakpoints: (
     }
   }
   @else {
-    @error 'No value found for `#{$breakpoint}`.'  
+    @error 'No value found for `#{$breakpoint}`.'
     + 'Please make sure it is defined in `$breakpoints` map.';
   }
 }
@@ -32,7 +32,7 @@ $breakpoints: (
   width: $width;
   height: $height;
 }
- 
+
 /*---- font size and line height -----*/
 @mixin fontandline($font-size, $line-height: $font-size) {
   font-size: $font-size;
@@ -49,9 +49,9 @@ $breakpoints: (
 
   .mat-bg {
     &--primary {
-      background: mat-color($primary);
+      //background: mat-color($primary);
       color: mat-color($primary, default-contrast) !important;
-      
+
       &--400 {
         background-color: mat-color($primary, 400);
       }
@@ -61,7 +61,7 @@ $breakpoints: (
       background: mat-color($accent);
       color: mat-color($accent, default-contrast) !important;
     }
-    
+
     &--warn {
       background: mat-color($warn);
     }
@@ -71,7 +71,7 @@ $breakpoints: (
       border-radius: 50%;
       border: 1px solid;
       border-color: mat-color($foreground, secondary-text);
-       
+
       .mat-icon  {
           color: mat-color($foreground, secondary-text);
         }
@@ -105,7 +105,7 @@ $breakpoints: (
     }
   }
 
-  .mat-card { 
+  .mat-card {
     &--bg {
       background: mat-color($background, card);
     }
@@ -114,7 +114,7 @@ $breakpoints: (
         &:hover {
           color: mat-color($primary) !important;
         }
-      }  
+      }
     }
   }
   .messages {
@@ -129,4 +129,4 @@ $breakpoints: (
   }
 }
 
- 
+
