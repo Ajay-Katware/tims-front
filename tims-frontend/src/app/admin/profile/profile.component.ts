@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("auth_token"));
     this.onSelect(this.user.country);
     console.log("country", this.user.country);
-  } 
+  }
 
   onSelect(country) {
     this.states = this.countryService.getStates().filter((item) => item.country === country);
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
 
   onSubmit(): void {
     console.log("user", this.user)
-    this.profileService.update(this.user);
+    //this.profileService.update(this.user);
     this.location.back();
   }
 

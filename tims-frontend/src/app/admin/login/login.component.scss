@@ -1,7 +1,7 @@
 @import 'src/themes/common/common.scss';
 
 .hello{
-  background-image: url("../../../assets/images/login-bg(1920x1080).jpg");
+  background-image: url("../../../assets/images/login-bg.jpg");
   width:100%;
   height:100%;
 }
@@ -24,8 +24,8 @@ mat-progress-bar{
 }
 
 .logo1 img {
-    width: 209px;
-    height:90px;
+    width: 100px;
+    height: 138px;
 }
 
 .seperator {

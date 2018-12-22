@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { compareValidator } from '../../../shared/directives/compare-validator.directive';
-import { UserService } from 'src/app/shared/services/user.service';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-update-password-dailog',
@@ -49,6 +49,6 @@ export class UpdatePasswordDailogComponent implements OnInit {
     onNoClick() {
       this.dialogRef.close();
     }
-  
+
 
 }
