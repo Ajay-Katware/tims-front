@@ -72,6 +72,7 @@ import { UpdatePasswordDailogComponent } from './dialog/update-password-dailog/u
 import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { BreadcrumbService } from '../shared/services/breadcrumb.service';
 import { SetPasswordComponent } from './set-password/set-password.component';
+import { CompareValidatorDirective } from '../shared/directives/compare-validator.directive';
 
 @NgModule({
   imports: [
@@ -86,6 +87,18 @@ import { SetPasswordComponent } from './set-password/set-password.component';
     AddDialogComponent, AdduserDialogComponent, EditRoleDialogComponent, AddPermissionDailogComponent,
     EditPermissionDialogComponent, AddProductComponent, EmailCustomerComponent,
     AddProductItemComponent],
-  declarations: [LayoutComponent, DashboardComponent, HeaderComponent, SidebarComponent, BreadcrumbComponent, ProfileComponent, FormsComponent, TablesComponent, DialogComponent, ConfirmDialogComponent, LoaderDialogComponent, SettingsComponent, WizardComponent, OtherElementsComponent, LoginComponent, RegisterComponent, ForgotPasswordComponent, ErrorComponent, DatatablesComponent, ChatComponent, GridSystemComponent, ImageDialogComponent, UserComponent, RoleComponent, AddDialogComponent, AdduserDialogComponent, PermissionsComponent, AddPermissionDailogComponent, EditPermissionDialogComponent, EditRoleDialogComponent, ProductsComponent, AddProductComponent, ViewProductComponent, CustomersComponent, AddCustomerComponent, ViewCustomerComponent, EmailCustomerComponent, SalesOrderComponent, CreateSalesOrderComponent, PackagesComponent, InvoicesComponent, ProductItemComponent, AddProductItemComponent, AddPackageComponent, AddItemsComponent, CreateShipmentComponent, CreateInvoiceComponent, PrintInvoiceComponent, UpdatePasswordDailogComponent, SetPasswordComponent]
+  declarations: [CompareValidatorDirective, LayoutComponent, DashboardComponent, HeaderComponent,
+     SidebarComponent, BreadcrumbComponent, ProfileComponent, FormsComponent,
+      TablesComponent, DialogComponent, ConfirmDialogComponent, LoaderDialogComponent,
+       SettingsComponent, WizardComponent, OtherElementsComponent, LoginComponent, 
+       RegisterComponent, ForgotPasswordComponent, ErrorComponent, DatatablesComponent, 
+       ChatComponent, GridSystemComponent, ImageDialogComponent, UserComponent, RoleComponent,
+        AddDialogComponent, AdduserDialogComponent, PermissionsComponent, AddPermissionDailogComponent,
+     EditPermissionDialogComponent, EditRoleDialogComponent, 
+     ProductsComponent, AddProductComponent, ViewProductComponent, CustomersComponent, AddCustomerComponent,
+      ViewCustomerComponent, EmailCustomerComponent, SalesOrderComponent,
+       CreateSalesOrderComponent, PackagesComponent, InvoicesComponent, ProductItemComponent, 
+       AddProductItemComponent, AddPackageComponent, AddItemsComponent, CreateShipmentComponent, 
+       CreateInvoiceComponent, PrintInvoiceComponent, UpdatePasswordDailogComponent, SetPasswordComponent]
 })
 export class AdminModule { }

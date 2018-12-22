@@ -114,8 +114,9 @@ export class UserService {
     return this.httpClient.get<User>(url);
   }
 
-  update(profile: User): void {
-    this.httpClient.post(this.api.USER_URL, profile).subscribe(data => {
+  update(id:number, profile: string): void {
+    const url = `${this.api.USER_URL}/${id}?password=${profile}`;
+    this.httpClient.get(url).subscribe(data => {
       if (!data) {
         return;
       } else {
