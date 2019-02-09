@@ -114,18 +114,18 @@ export class UserService {
     return this.httpClient.get<User>(url);
   }
 
-  update(id:number, profile: string): void {
-    const url = `${this.api.USER_URL}/${id}?password=${profile}`;
-    this.httpClient.get(url).subscribe(data => {
-      if (!data) {
-        return;
-      } else {
-        this.toasterService.openSuccessSnackBar('Successfully updated', '', 2000);
-      }
-    },
-      (err: HttpErrorResponse) => {
-        this.toasterService.openErrorSnackBar('Error occurred. Details: ' + err.name + ' ' + err.message, '', 8000);
-      });
+  update(id:number, profile: string): Observable<User> {
+    const url = `${this.api.UPDATEPWD_URL}/${id}`;
+    let httpHeaders = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+  let httpParams = new HttpParams()
+    .set('password', profile);
+
+    return this.httpClient.get<User>(url, {
+      headers: httpHeaders,
+      params: httpParams,
+      responseType: 'json'
+    });
   }
 
   checkUserByResetToken(resetToken: string): Observable<User> {

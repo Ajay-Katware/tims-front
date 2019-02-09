@@ -4,6 +4,7 @@
   width: 240px;
   height: 100vh;
   overflow: hidden;
+  box-shadow: none;
 
   .sidebar-left {
     padding-top: 140px;
@@ -15,6 +16,7 @@
       top: 0;
       left: 0;
       z-index: 999;
+      box-shadow: none;
 
       .mat-h5 { line-height: 10px !important; }
     }

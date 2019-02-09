@@ -1,7 +1,8 @@
+import  {environment} from '../../../environments/environment';
+
 export class RestApi {
 
-    public readonly API_URL = 'http://13.233.124.20:8080/timsrest';
-    //public readonly API_URL = 'http://192.168.15.116:8080/timsrest/';
+    public readonly API_URL = environment.baseUrl;
 
     //LOGIN MODULE API
     public readonly LOGIN_URL = this.API_URL + '/login';
@@ -34,6 +35,8 @@ export class RestApi {
 
     //
     public readonly CUSTOMER_URL = this.API_URL + '/customers';
+
+    public readonly VENDOR_URL = this.API_URL + '/vendor';
 
     //PRODUCT URL
     public readonly SALESORDER_URL = this.API_URL + '/salesorders';

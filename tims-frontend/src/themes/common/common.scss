@@ -108,6 +108,7 @@ $breakpoints: (
   .mat-card {
     &--bg {
       background: mat-color($background, card);
+      box-shadow: none;
     }
     .custom__card__footer, .custom__card__actions {
       a{

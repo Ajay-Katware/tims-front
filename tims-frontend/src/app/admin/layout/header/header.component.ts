@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { UpdatePasswordDailogComponent } from '../../dialog/update-password-dailog/update-password-dailog.component';
 import { LoginService } from '../../../shared/services/login.service';
-import { GeneratedFile } from '@angular/compiler';
 import { GenericTerm } from '../../Generic/generic-term';
+import { ToasterService } from '../../../shared/services/toaster.service';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private themeService: ThemeService,
     private loginService:LoginService,
+    private toasterService:ToasterService,
     private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
@@ -54,8 +55,10 @@ export class HeaderComponent implements OnInit {
     });
 
      dialogRef.afterClosed().subscribe(result => {
-      if (result == 1) {
-
+      if (result) {
+          this.toasterService.openSuccessSnackBar("Your password updated successfully", "ok", 2000);
+       }else{
+         this.toasterService.openErrorSnackBar("Something is wrong. Please try again.", "", 2000);
        }
     });
   }

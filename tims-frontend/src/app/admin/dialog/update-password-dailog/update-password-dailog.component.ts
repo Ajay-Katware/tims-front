@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { compareValidator } from '../../../shared/directives/compare-validator.directive';
 import { UserService } from '../../../shared/services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToasterService } from '../../../shared/services/toaster.service';
 
 @Component({
   selector: 'app-update-password-dailog',
@@ -13,8 +15,12 @@ export class UpdatePasswordDailogComponent implements OnInit {
 
   heroForm:FormGroup;
   userId:number = 0;
+  myPassword :string;
   constructor(public dialogRef: MatDialogRef<UpdatePasswordDailogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private fb:FormBuilder, private userService: UserService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    private fb:FormBuilder, 
+    private toasterService:ToasterService,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.userId = JSON.parse(localStorage.getItem('userid'));
@@ -39,16 +45,24 @@ export class UpdatePasswordDailogComponent implements OnInit {
 
   onSubmit(){
     const formModel = this.heroForm.value;
-    let password = formModel.password;
-    console.log("this.password", password);
+    this.myPassword = formModel.password;
     if(this.userId > 0){
-      this.userService.update(this.userId, password);
+      console.log("this.password", this.myPassword);
+      this.userService.update(this.userId, this.myPassword).subscribe(data=>{
+        if(data != null){
+          this.dialogRef.close(false);
+        }else{
+          this.dialogRef.close(true);
+        }
+      }, (err:HttpErrorResponse)=>{
+        this.dialogRef.close();
+      });
     }
   }
 
-    onNoClick() {
+  onNoClick() {
       this.dialogRef.close();
-    }
+  }
 
 
 }

@@ -1,6 +1,7 @@
 @import 'src/themes/common/common.scss';
 .mat-toolbar {
     padding: 0 !important;
+    box-shadow: none;
 
     .user__icon {
         min-height: 64px;

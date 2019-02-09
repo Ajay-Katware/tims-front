@@ -7,6 +7,7 @@ import { ProductService } from '../../../shared/services/product.service';
 import { CustomerService } from '../../../shared/services/customer.service';
 import { SalesOrdersService } from '../../../shared/services/sales-orders.service';
 import { ProductItemService } from '../../../shared/services/product-item.service';
+import { VendorService } from '../../../shared/services/vendor.service';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -24,6 +25,7 @@ export class ConfirmDialogComponent implements OnInit {
     private customerService:CustomerService,
     private itemService:ProductItemService,
     private salesorderService:SalesOrdersService,
+    private vendorService:VendorService,
     private productService: ProductService) { }
 
   onNoClick(): void {
@@ -57,7 +59,11 @@ export class ConfirmDialogComponent implements OnInit {
         console.log("customer");
         this.customerService.deleteCustomer(this.data.id);
         break;
-        case "salesorder":
+      case "vendor":
+        console.log("customer");
+        this.vendorService.deleteVendor(this.data.id);
+        break;
+      case "salesorder":
       console.log("salesorder");
         this.salesorderService.remove(this.data.id);
         break;

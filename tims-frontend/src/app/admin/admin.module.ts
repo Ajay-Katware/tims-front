@@ -73,6 +73,9 @@ import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { BreadcrumbService } from '../shared/services/breadcrumb.service';
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { CompareValidatorDirective } from '../shared/directives/compare-validator.directive';
+import { VendorComponent } from './vendor/vendor.component';
+import { VendorService } from '../shared/services/vendor.service';
+import { AddVendorComponent } from './vendor/add-vendor/add-vendor.component';
 
 @NgModule({
   imports: [
@@ -82,7 +85,9 @@ import { CompareValidatorDirective } from '../shared/directives/compare-validato
     QuillModule,
     NgxDatatableModule,
   ],
-  providers: [ThemeService, AuthGuardService, BreadcrumbService, UserService, RoleService, PermissionsService, ToasterService, CountryStateService, ProductItemService, ProductService, LoginService, CustomerService, SalesOrdersService, PackageOrderService, PackageItemService],
+  providers: [ThemeService, AuthGuardService, BreadcrumbService, UserService, RoleService, PermissionsService, ToasterService, CountryStateService, ProductItemService, ProductService, LoginService, 
+    VendorService,
+    CustomerService, SalesOrdersService, PackageOrderService, PackageItemService],
   entryComponents: [ConfirmDialogComponent, LoaderDialogComponent, ImageDialogComponent, UpdatePasswordDailogComponent,
     AddDialogComponent, AdduserDialogComponent, EditRoleDialogComponent, AddPermissionDailogComponent,
     EditPermissionDialogComponent, AddProductComponent, EmailCustomerComponent,
@@ -99,6 +104,6 @@ import { CompareValidatorDirective } from '../shared/directives/compare-validato
       ViewCustomerComponent, EmailCustomerComponent, SalesOrderComponent,
        CreateSalesOrderComponent, PackagesComponent, InvoicesComponent, ProductItemComponent, 
        AddProductItemComponent, AddPackageComponent, AddItemsComponent, CreateShipmentComponent, 
-       CreateInvoiceComponent, PrintInvoiceComponent, UpdatePasswordDailogComponent, SetPasswordComponent]
+       CreateInvoiceComponent, PrintInvoiceComponent, UpdatePasswordDailogComponent, SetPasswordComponent, VendorComponent, AddVendorComponent]
 })
 export class AdminModule { }

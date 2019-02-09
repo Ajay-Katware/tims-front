@@ -34,6 +34,8 @@ import { PrintInvoiceComponent } from './invoices/print-invoice/print-invoice.co
 import { AuthGuardService as AuthGuard } from '../shared/services/auth-guard.service';
 import { Breadcrumb } from '../shared/models/breadcrumb';
 import { SetPasswordComponent } from './set-password/set-password.component';
+import { VendorComponent } from './vendor/vendor.component';
+import { AddVendorComponent } from './vendor/add-vendor/add-vendor.component';
 
 const routes: Routes = [
   {
@@ -77,6 +79,12 @@ const routes: Routes = [
       { path: 'customers/add', component: AddCustomerComponent, canActivate: [AuthGuard] },
       { path: 'customers/edit/:id', component: AddCustomerComponent, canActivate: [AuthGuard] },
       { path: 'customers/view/:id', component: ViewCustomerComponent, canActivate: [AuthGuard] },
+
+      { path: 'vendors', component: VendorComponent, canActivate: [AuthGuard] },
+      { path: 'vendors/add', component: AddVendorComponent, canActivate: [AuthGuard] },
+      { path: 'vendors/edit/:id', component: AddVendorComponent, canActivate: [AuthGuard] },
+      { path: 'vendors/view/:id', component: ViewCustomerComponent, canActivate: [AuthGuard] },
+
       { path: 'salesorders', component: SalesOrderComponent, canActivate: [AuthGuard] },
       { path: 'salesorders/add', component: CreateSalesOrderComponent, canActivate: [AuthGuard] },
       { path: 'salesorders/edit', component: CreateSalesOrderComponent, canActivate: [AuthGuard] },
